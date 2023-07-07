@@ -1,86 +1,48 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
   String adminEmail = "";
   String adminPassword = "";
 
-  // allowAdminToLogin() async {
-  //   SnackBar snackBar = const SnackBar(
-  //     content: Text(
-  //       "Checking Credentials, Please wait...",
-  //       style: TextStyle(
-  //         fontSize: 36,
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //     backgroundColor: Colors.cyan,
-  //     duration: Duration(seconds: 6),
-  //   );
-  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    );
+    _animation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.fastEaseInToSlowEaseOut,
+      ),
+    );
+    _animationController.forward();
+    super.initState();
+  }
 
-  //   User? currentAdmin;
-  //   await FirebaseAuth.instance
-  //       .signInWithEmailAndPassword(
-  //     email: adminEmail,
-  //     password: adminPassword,
-  //   )
-  //       .then((fAuth) {
-  //     //success
-  //     currentAdmin = fAuth.user;
-  //   }).catchError((onError) {
-  //     //in case of error
-  //     //display error message
-  //     final snackBar = SnackBar(
-  //       content: Text(
-  //         "Error Occured: $onError",
-  //         style: const TextStyle(
-  //           fontSize: 36,
-  //           color: Colors.black,
-  //         ),
-  //       ),
-  //       backgroundColor: Colors.cyan,
-  //       duration: const Duration(seconds: 5),
-  //     );
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   });
-
-  //   if (currentAdmin != null) {
-  //     //check if that admin record also exists in the admins collection in firestore database
-  //     await FirebaseFirestore.instance
-  //         .collection("admins")
-  //         .doc(currentAdmin!.uid)
-  //         .get()
-  //         .then((snap) {
-  //       if (snap.exists) {
-  //         Navigator.push(
-  //             context, MaterialPageRoute(builder: (c) => const HomeScreen()));
-  //       } else {
-  //         SnackBar snackBar = const SnackBar(
-  //           content: Text(
-  //             "No record found, you are not an admin.",
-  //             style: TextStyle(
-  //               fontSize: 36,
-  //               color: Colors.black,
-  //             ),
-  //           ),
-  //           backgroundColor: Colors.cyan,
-  //           duration: Duration(seconds: 6),
-  //         );
-  //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //       }
-  //     });
-  //   }
-  // }
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double imageWidth = screenSize.width * 0.3;
+    final double imageHeight = imageWidth;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: ListView(
@@ -89,31 +51,44 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Center(
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * .5,
+                  width: imageWidth,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //image
-                      Image.asset("images/admin.png"),
+                      // Image
+                      FadeTransition(
+                        opacity: _animation,
+                        child: Image.asset(
+                          "images/admin.png",
+                          width: imageWidth,
+                          height: imageHeight,
+                        ),
+                      ),
 
-                      //email text field
+                      const SizedBox(height: 30),
+
+                      // Email text field
                       TextField(
                         onChanged: (value) {
-                          adminEmail = value;
+                          setState(() {
+                            adminEmail = value;
+                          });
                         },
                         style:
                             const TextStyle(fontSize: 16, color: Colors.white),
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.cyan,
-                            width: 2,
-                          )),
+                            borderSide: BorderSide(
+                              color: Colors.cyan,
+                              width: 2,
+                            ),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.pinkAccent,
-                            width: 2,
-                          )),
+                            borderSide: BorderSide(
+                              color: Colors.pinkAccent,
+                              width: 2,
+                            ),
+                          ),
                           hintText: "Email",
                           hintStyle: TextStyle(color: Colors.grey),
                           icon: Icon(
@@ -125,25 +100,29 @@ class _LoginPageState extends State<LoginPage> {
 
                       const SizedBox(height: 10),
 
-                      //password text field
+                      // Password text field
                       TextField(
                         onChanged: (value) {
-                          adminPassword = value;
+                          setState(() {
+                            adminPassword = value;
+                          });
                         },
                         obscureText: true,
                         style:
                             const TextStyle(fontSize: 16, color: Colors.white),
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.cyan,
-                            width: 2,
-                          )),
+                            borderSide: BorderSide(
+                              color: Colors.cyan,
+                              width: 2,
+                            ),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.pinkAccent,
-                            width: 2,
-                          )),
+                            borderSide: BorderSide(
+                              color: Colors.pinkAccent,
+                              width: 2,
+                            ),
+                          ),
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.grey),
                           icon: Icon(
@@ -155,27 +134,20 @@ class _LoginPageState extends State<LoginPage> {
 
                       const SizedBox(height: 30),
 
-                      //button login
-                      ElevatedButton(
-                        onPressed: () {
-                          // allowAdminToLogin();
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.symmetric(
-                                  horizontal: 100, vertical: 20)),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.cyan),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              Colors.pinkAccent),
-                        ),
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 2,
-                            fontSize: 16,
+                      // Button login
+                      FadeTransition(
+                        opacity: _animation,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(
+                                horizontal: screenSize.width * 0.1,
+                                vertical: screenSize.height * 0.025,
+                              ),
+                            ),
                           ),
+                          child: const Text("Login"),
                         ),
                       ),
                     ],
