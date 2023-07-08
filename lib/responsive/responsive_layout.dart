@@ -1,67 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 
 class ResponsiveLayout extends StatelessWidget {
-  final Widget tiny;
+  final Widget? smartwatch;
+  final Widget? smallPhone;
   final Widget phone;
+  final Widget? miniTablet;
   final Widget tablet;
-  final Widget largeTablet;
+  final Widget? largeTablet;
   final Widget computer;
 
   const ResponsiveLayout({
     super.key,
-    required this.tiny,
+    this.smartwatch,
+    this.smallPhone,
     required this.phone,
+    this.miniTablet,
     required this.tablet,
-    required this.largeTablet,
+    this.largeTablet,
     required this.computer,
   });
 
-  static const int tinyHeightLimit = 100;
-  static const int tinyLimit = 270;
-  static const int phoneLimit = 550;
-  static const int tabletLimit = 800;
-  static const int largeTabletLimit = 1100;
+  static const int smartwatchMinWidth = 200;
+  static const int smallPhoneMinWidth = 375;
+  static const int phoneMinWidth = 414;
+  static const int miniTabletMinWidth = 768;
+  static const int tabletMinWidth = 820;
+  static const int largeTabletMinWidth = 912;
+  static const int computerMinWidth = 1024;
 
-  static bool isTinyHeightLimit(BuildContext context) =>
-      MediaQuery.sizeOf(context).height < tinyHeightLimit;
-
-  static bool isTinyLimit(BuildContext context) =>
-      MediaQuery.sizeOf(context).width < tinyLimit;
-
-  static bool isPhone(BuildContext context) =>
-      MediaQuery.sizeOf(context).width < phoneLimit &&
-      MediaQuery.sizeOf(context).width >= tinyLimit;
-
-  static bool isTablet(BuildContext context) =>
-      MediaQuery.sizeOf(context).width < tabletLimit &&
-      MediaQuery.sizeOf(context).width >= phoneLimit;
-
-  static bool isLargeTablet(BuildContext context) =>
-      MediaQuery.sizeOf(context).width < largeTabletLimit &&
-      MediaQuery.sizeOf(context).width >= tabletLimit;
-
-  static bool isComputer(BuildContext context) =>
-      MediaQuery.sizeOf(context).width >= largeTabletLimit;
+  static bool isSmartwatch() => Screen.width() <= smartwatchMinWidth;
+  static bool isSmallPhone() => Screen.width() <= smallPhoneMinWidth;
+  static bool isPhone() => Screen.width() <= phoneMinWidth;
+  static bool isMiniTablet() => Screen.width() <= miniTabletMinWidth;
+  static bool isTablet() => Screen.width() <= tabletMinWidth;
+  static bool isLargeTablet() => Screen.width() <= largeTabletMinWidth;
+  static bool isComputer() => Screen.width() <= computerMinWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth < tinyLimit ||
-            constraints.maxHeight < tinyHeightLimit) {
-          return tiny;
-        }
-        if (constraints.maxWidth < phoneLimit) {
+      builder: (context, constraints) {
+        if (isSmartwatch()) {
+          return smartwatch ?? phone;
+        } else if (isSmallPhone()) {
+          return smallPhone ?? phone;
+        } else if (isPhone()) {
           return phone;
-        }
-        if (constraints.maxWidth < tabletLimit) {
+        } else if (isMiniTablet()) {
+          return miniTablet ?? tablet;
+        } else if (isTablet()) {
           return tablet;
+        } else if (isLargeTablet()) {
+          return largeTablet ?? tablet;
         }
-        if (constraints.maxWidth < largeTabletLimit) {
-          return largeTablet;
-        } else {
-          return computer;
-        }
+        return computer;
       },
     );
   }
