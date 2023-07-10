@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const defaultPadding = 16.0;
+const double yDefaultSize = 30.0;
+const double ySplashContainerSize = 30.0;
 
 class Screen {
   static late Size size;

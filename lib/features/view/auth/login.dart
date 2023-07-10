@@ -1,176 +1,233 @@
 import 'package:flutter/material.dart';
+import 'package:fullfill_admin_web_portal/constants/colors.dart';
+import 'package:fullfill_admin_web_portal/constants/image_strings.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
-import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
+import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      smartwatch: buildSmartwatchLayout(),
-      smallPhone: buildSmallPhoneLayout(),
-      phone: buildPhoneLayout(),
-      miniTablet: buildMiniTabletLayout(),
-      tablet: buildTabletLayout(),
-      largeTablet: buildLargeTabletLayout(),
-      computer: buildComputerLayout(),
-    );
-  }
-
-  Widget buildMiniTabletLayout() {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
+      body: SizedBox(
+        width: Screen.width(),
+        height: Screen.height(),
+        child: Stack(
           children: [
-            const Text(
-              'Mini Tablet Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: Screen.width(50),
+                  color: yPrimaryColor,
+                ),
+                Container(
+                  height: double.infinity,
+                  width: Screen.width(50),
+                  color: yWhiteColor,
+                ),
+              ],
             ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Text(
+                  "Welcome",
+                  style: TextStyle(
+                    color: yWhiteColor,
+                    fontSize: Screen.width(3),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            const LoginLayout(),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      yAppName,
+                      style: TextStyle(
+                        color: yWhiteColor,
+                        fontSize: Screen.width(2),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      yAppTagLine,
+                      style: TextStyle(
+                        color: yWhiteColor,
+                        fontSize: Screen.width(1.2),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: yPrimaryColor,
+                  child: ColorFiltered(
+                    colorFilter: const ColorFilter.mode(
+                      yWhiteColor,
+                      BlendMode.srcIn,
+                    ),
+                    child: Container(
+                      width: 80,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage(yAppLogo),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: yGreyColor,
+                      size: Screen.width(2),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      yDevName,
+                      style: TextStyle(
+                        color: yGreyColor,
+                        fontSize: Screen.width(1.2),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget buildSmallPhoneLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'SmallPhone Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-      ),
-    );
-  }
+class LoginLayout extends StatelessWidget {
+  const LoginLayout({super.key});
 
-  Widget buildFoldablePhoneLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'FoldablePhone Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(64),
+      child: Center(
+        child: Card(
+          elevation: 4,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(25),
             ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildSmartwatchLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'Smartwatch Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            height: Screen.height(60),
+            width: 500,
+            decoration: BoxDecoration(
+                color: yWhiteColor, borderRadius: BorderRadius.circular(20)),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "LOG IN",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: yGreyColor[700],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const SizedBox(
+                        width: 30,
+                        child: Divider(
+                          color: yPrimaryColor,
+                          thickness: 2,
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      const TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          labelText: 'Email',
+                          suffixIcon: Icon(
+                            Icons.mail_outline,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      const TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          labelText: 'Password',
+                          suffixIcon: Icon(
+                            Icons.lock_outline,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 64),
+                      Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: yPrimaryColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(25),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: yPrimaryColor.withOpacity(0.2),
+                              spreadRadius: 4,
+                              blurRadius: 7,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(
+                              color: yWhiteColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget buildLargeComputerLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'LargeComputer Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildPhoneLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'Phone Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-        // child: Icon(Icons.call),
-      ),
-    );
-  }
-
-  Widget buildTabletLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'Tablet Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-        // child: Icon(Icons.tablet_mac_outlined),
-      ),
-    );
-  }
-
-  Widget buildLargeTabletLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'Large Tablet Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-        // child: Icon(Icons.tv),
-      ),
-    );
-  }
-
-  Widget buildComputerLayout() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text(
-              'Computer Layout',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text("Height : ${Screen.height()} :: width ${Screen.width()}"),
-          ],
-        ),
-        // child: Icon(Icons.computer),
       ),
     );
   }
