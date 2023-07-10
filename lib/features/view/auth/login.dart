@@ -4,6 +4,7 @@ import 'package:fullfill_admin_web_portal/constants/image_strings.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/widgets/custom_text_field.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -201,7 +202,10 @@ class LoginLayout extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               if (loginProvider.loginFormKey.currentState!
-                                  .validate()) {}
+                                  .validate()) {
+                              //   Navigator.of(context).push(MaterialPageRoute(
+                              //       builder: (context) => const HomePage()));
+                              }
                             },
                             child: Container(
                               height: 50,
