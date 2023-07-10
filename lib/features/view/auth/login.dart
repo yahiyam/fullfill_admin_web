@@ -3,6 +3,9 @@ import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/image_strings.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
+import 'package:fullfill_admin_web_portal/features/view/auth/widgets/custom_text_field.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -148,81 +151,93 @@ class LoginLayout extends StatelessWidget {
             height: Screen.height(60),
             width: 500,
             decoration: BoxDecoration(
-                color: yWhiteColor, borderRadius: BorderRadius.circular(20)),
+              color: yWhiteColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Center(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(40),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "LOG IN",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: yGreyColor[700],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const SizedBox(
-                        width: 30,
-                        child: Divider(
-                          color: yPrimaryColor,
-                          thickness: 2,
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          labelText: 'Email',
-                          suffixIcon: Icon(
-                            Icons.mail_outline,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          labelText: 'Password',
-                          suffixIcon: Icon(
-                            Icons.lock_outline,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 64),
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: yPrimaryColor,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: yPrimaryColor.withOpacity(0.2),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Log In",
+                  child: Consumer<LoginProvider>(
+                      builder: (context, loginProvider, _) {
+                    return Form(
+                      key: loginProvider.loginFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "LOG IN",
                             style: TextStyle(
-                              color: yWhiteColor,
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              color: yGreyColor[700],
                             ),
                           ),
-                        ),
+                          const SizedBox(height: 8),
+                          const SizedBox(
+                            width: 30,
+                            child: Divider(
+                              color: yPrimaryColor,
+                              thickness: 2,
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                          CustomTextField(
+                            controller: loginProvider.emailController,
+                            labelText: 'Email address',
+                            hintText: 'Email',
+                            icon: Icons.mail_outline,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          const SizedBox(height: 32),
+                          CustomTextField(
+                            controller: loginProvider.passwordController,
+                            obscureText: true,
+                            hintText: 'Password',
+                            labelText: 'Password',
+                            icon: Icons.password_rounded,
+                            showSuffixIcon: true,
+                          ),
+                          const SizedBox(height: 64),
+                          GestureDetector(
+                            onTap: () {
+                              if (loginProvider.loginFormKey.currentState!
+                                  .validate()) {}
+                            },
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              alignment: FractionalOffset.center,
+                              decoration: BoxDecoration(
+                                color: yPrimaryColor,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(25),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: yPrimaryColor.withOpacity(0.2),
+                                    spreadRadius: 4,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "Log In",
+                                  style: TextStyle(
+                                    color: yWhiteColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                        ],
                       ),
-                      const SizedBox(height: 32),
-                    ],
-                  ),
+                    );
+                  }),
                 ),
               ),
             ),

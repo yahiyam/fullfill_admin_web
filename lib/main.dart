@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/login.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Obscure()),
+        ChangeNotifierProvider(create: (context) => LoginProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
