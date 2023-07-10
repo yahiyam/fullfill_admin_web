@@ -29,13 +29,13 @@ class ResponsiveLayout extends StatelessWidget {
   static const int largeTabletMinWidth = 912;
   static const int computerMinWidth = 1024;
 
-  static bool isSmartwatch() => Screen.width() <= smartwatchMinWidth;
-  static bool isSmallPhone() => Screen.width() <= smallPhoneMinWidth;
-  static bool isPhone() => Screen.width() <= phoneMinWidth;
-  static bool isMiniTablet() => Screen.width() <= miniTabletMinWidth;
-  static bool isTablet() => Screen.width() <= tabletMinWidth;
-  static bool isLargeTablet() => Screen.width() <= largeTabletMinWidth;
-  static bool isComputer() => Screen.width() <= computerMinWidth;
+  static bool isSmartwatch() => KSizes.width() <= smartwatchMinWidth;
+  static bool isSmallPhone() => KSizes.width() <= smallPhoneMinWidth;
+  static bool isPhone() => KSizes.width() <= phoneMinWidth;
+  static bool isMiniTablet() => KSizes.width() <= miniTabletMinWidth;
+  static bool isTablet() => KSizes.width() <= tabletMinWidth;
+  static bool isLargeTablet() => KSizes.width() <= largeTabletMinWidth;
+  static bool isComputer() => KSizes.width() <= computerMinWidth;
 
   @override
   Widget build(BuildContext context) {

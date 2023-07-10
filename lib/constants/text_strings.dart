@@ -1,5 +1,7 @@
 /* App Text Strings */
-const String yAppName = 'FULLFILL';
-const String yAppTagLine = "Satisfy Your Cravings, Beyond Food!";
-const String yDevName = 'Yahiya Muhammed';
-const String moneyCode = '\u20B9'; //rupee
+class KTexts {
+  static const String appName = 'FULLFILL';
+  static const String appTagLine = "Satisfy Your Cravings, Beyond Food!";
+  static const String developerName = 'Yahiya Muhammed';
+  static const String currencyCode = '\u20B9'; //rupee
+}

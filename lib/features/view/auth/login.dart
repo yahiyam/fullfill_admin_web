@@ -14,21 +14,21 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        width: Screen.width(),
-        height: Screen.height(),
+        width: KSizes.width(),
+        height: KSizes.height(),
         child: Stack(
           children: [
             Row(
               children: [
                 Container(
                   height: double.infinity,
-                  width: Screen.width(50),
-                  color: yPrimaryColor,
+                  width: KSizes.width(50),
+                  color: KColors.primary,
                 ),
                 Container(
                   height: double.infinity,
-                  width: Screen.width(50),
-                  color: yWhiteColor,
+                  width: KSizes.width(50),
+                  color: KColors.white,
                 ),
               ],
             ),
@@ -39,8 +39,8 @@ class LoginPage extends StatelessWidget {
                 child: Text(
                   "Welcome",
                   style: TextStyle(
-                    color: yWhiteColor,
-                    fontSize: Screen.width(3),
+                    color: KColors.white,
+                    fontSize: KSizes.width(3),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -56,18 +56,18 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      yAppName,
+                      KTexts.appName,
                       style: TextStyle(
-                        color: yWhiteColor,
-                        fontSize: Screen.width(2),
+                        color: KColors.white,
+                        fontSize: KSizes.width(2),
                       ),
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      yAppTagLine,
+                      KTexts.appTagLine,
                       style: TextStyle(
-                        color: yWhiteColor,
-                        fontSize: Screen.width(1.2),
+                        color: KColors.white,
+                        fontSize: KSizes.width(1.2),
                       ),
                     ),
                   ],
@@ -80,10 +80,10 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(32),
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundColor: yPrimaryColor,
+                  backgroundColor: KColors.primary,
                   child: ColorFiltered(
                     colorFilter: const ColorFilter.mode(
-                      yWhiteColor,
+                      KColors.white,
                       BlendMode.srcIn,
                     ),
                     child: Container(
@@ -91,7 +91,7 @@ class LoginPage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage(yAppLogo),
+                          image: AssetImage(KImages.appLogo),
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -109,15 +109,15 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.person,
-                      color: yGreyColor,
-                      size: Screen.width(2),
+                      color: KColors.grey,
+                      size: KSizes.width(2),
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      yDevName,
+                      KTexts.developerName,
                       style: TextStyle(
-                        color: yGreyColor,
-                        fontSize: Screen.width(1.2),
+                        color: KColors.grey,
+                        fontSize: KSizes.width(1.2),
                       ),
                     ),
                   ],
@@ -148,10 +148,10 @@ class LoginLayout extends StatelessWidget {
           ),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            height: Screen.height(60),
+            height: KSizes.height(60),
             width: 500,
             decoration: BoxDecoration(
-              color: yWhiteColor,
+              color: KColors.white,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Center(
@@ -169,14 +169,14 @@ class LoginLayout extends StatelessWidget {
                             "LOG IN",
                             style: TextStyle(
                               fontSize: 18,
-                              color: yGreyColor[700],
+                              color: KColors.grey[700],
                             ),
                           ),
                           const SizedBox(height: 8),
                           const SizedBox(
                             width: 30,
                             child: Divider(
-                              color: yPrimaryColor,
+                              color: KColors.primary,
                               thickness: 2,
                             ),
                           ),
@@ -208,13 +208,13 @@ class LoginLayout extends StatelessWidget {
                               width: double.infinity,
                               alignment: FractionalOffset.center,
                               decoration: BoxDecoration(
-                                color: yPrimaryColor,
+                                color: KColors.primary,
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(25),
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: yPrimaryColor.withOpacity(0.2),
+                                    color: KColors.primary.withOpacity(0.2),
                                     spreadRadius: 4,
                                     blurRadius: 7,
                                     offset: const Offset(0, 3),
@@ -225,7 +225,7 @@ class LoginLayout extends StatelessWidget {
                                 child: Text(
                                   "Log In",
                                   style: TextStyle(
-                                    color: yWhiteColor,
+                                    color: KColors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),

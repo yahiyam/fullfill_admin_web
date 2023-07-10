@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
             labelText: labelText,
             suffixIcon: Icon(
               icon,
-              color: yPrimaryColor,
+              color:KColors.primary,
             ),
             contentPadding: const EdgeInsets.only(bottom: 10),
             suffix: obscureText! && showSuffixIcon! && obscure.isTyped

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-const double yDefaultSize = 30.0;
-const double ySplashContainerSize = 30.0;
-
-class Screen {
+class KSizes {
   static late Size size;
 
   static double width([double percentage = 100]) {
@@ -13,4 +10,8 @@ class Screen {
   static double height([double percentage = 100]) {
     return size.height * percentage / 100;
   }
+
+  static double border = 30.0;
+  static double splashContainer = 30.0;
+  static const double smallPadding = 10.0;
 }
