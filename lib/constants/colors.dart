@@ -8,10 +8,10 @@ class KColors {
   static const complementaryPrimary = Color(0xFF800080); // Purple
   static const analogous1Primary = Color(0xFF008080); // Teal
   static const analogous2Primary = Color(0xFF00A000); // Green
-  static const darkerShade1Primary = Color(0xFF004000); // Darker Green
-  static const darkerShade2Primary = Color(0xFF005000); // Even Darker Green
-  static const lighterShade1Primary = Color(0xFF80FF80); // Light Green
-  static const lighterShade2Primary = Color(0xFFB3FFB3); // Even Lighter Green
+  static const darkerShade1Primary = Color(0xFF004000);
+  static const darkerShade2Primary = Color(0xFF005000);
+  static const lighterShade1Primary = Color(0xFF80FF80);
+  static const lighterShade2Primary = Color(0xFFB3FFB3);
 
   static const secondary = Color(0xFFFFD700); // Golden Yellow
   static const complementarySecondary = Color(0xFFD5D2C2);
@@ -22,14 +22,14 @@ class KColors {
   static const lighterShade1Secondary = Color(0xFF3B3E4C);
   static const lighterShade2Secondary = Color(0xFF444757);
 
-  static const pageBackGround = Color(0xFF212332);
-  static const purpleLight = Color(0XFF1e224c);
-  static const purpleDark = Color.fromARGB(255, 13, 25, 62);
-  static const Color orange = Color(0XFFec8d2f);
-  static const Color red = Color(0XFFf44336);
+  // static const pageBackGround = Color(0xFF212332);
+  // static const purpleLight = Color(0XFF1e224c);
+  // static const purpleDark = Color.fromARGB(255, 13, 25, 62);
+  // static const Color orange = Color(0XFFec8d2f);
+  // static const Color red = Color(0XFFf44336);
 
-  static const white = Colors.white;
-  static const grey = Colors.grey;
-  static const deepPurple = Colors.deepPurple;
-  static const blue = Colors.blue;
+  // static const white = Colors.white;
+  // static const grey = Colors.grey;
+  // static const deepPurple = Colors.deepPurple;
+  // static const blue = Colors.blue;
 }
