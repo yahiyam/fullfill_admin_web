@@ -6,27 +6,29 @@ import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/widgets/login_layout.dart';
 
 class LoginPage extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
   LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        width: KSizes.width(),
-        height: KSizes.height(),
+        width: KSizes.screenWidth(),
+        height: KSizes.screenHeight(),
         child: Stack(
           children: [
             Row(
               children: [
                 Container(
                   height: double.infinity,
-                  width: KSizes.width(50),
+                  width: KSizes.screenWidth(50),
                   color: KColors.primary,
                 ),
                 Container(
-                    height: double.infinity,
-                    width: KSizes.width(50),
-                    color: KColors.lighterShade2Secondary),
+                  height: double.infinity,
+                  width: KSizes.screenWidth(50),
+                  color: KColors.lighterShade2Secondary,
+                ),
               ],
             ),
             Align(
@@ -37,7 +39,7 @@ class LoginPage extends StatelessWidget {
                   "Welcome",
                   style: TextStyle(
                     color: KColors.neutralColor,
-                    fontSize: KSizes.width(3),
+                    fontSize: KSizes.screenWidth(3),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -56,7 +58,7 @@ class LoginPage extends StatelessWidget {
                       KTexts.appName,
                       style: TextStyle(
                         color: KColors.neutralColor,
-                        fontSize: KSizes.width(2),
+                        fontSize: KSizes.screenWidth(2),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -64,7 +66,7 @@ class LoginPage extends StatelessWidget {
                       KTexts.appTagLine,
                       style: TextStyle(
                         color: KColors.neutralColor,
-                        fontSize: KSizes.width(1.2),
+                        fontSize: KSizes.screenWidth(1.2),
                       ),
                     ),
                   ],
@@ -107,14 +109,14 @@ class LoginPage extends StatelessWidget {
                     Icon(
                       Icons.person,
                       color: KColors.secondary,
-                      size: KSizes.width(2),
+                      size: KSizes.screenWidth(2),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       KTexts.developerName,
                       style: TextStyle(
                         color: KColors.secondary,
-                        fontSize: KSizes.width(1.2),
+                        fontSize: KSizes.screenWidth(1.2),
                       ),
                     ),
                   ],

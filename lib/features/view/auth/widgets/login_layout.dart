@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/widgets/custom_text_field.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class LoginLayout extends StatelessWidget {
           ),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            height: KSizes.height(60),
+            height: KSizes.screenHeight(60),
             width: 500,
             decoration: BoxDecoration(
               color: KColors.neutralColor,
@@ -76,8 +77,8 @@ class LoginLayout extends StatelessWidget {
                             onTap: () {
                               if (loginProvider.loginFormKey.currentState!
                                   .validate()) {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => const HomePage()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
                               }
                             },
                             child: Container(

@@ -21,21 +21,50 @@ class ResponsiveLayout extends StatelessWidget {
     required this.computer,
   });
 
-  static const int smartwatchMinWidth = 200;
-  static const int smallPhoneMinWidth = 375;
-  static const int phoneMinWidth = 414;
-  static const int miniTabletMinWidth = 768;
-  static const int tabletMinWidth = 820;
-  static const int largeTabletMinWidth = 912;
-  static const int computerMinWidth = 1024;
+  // static const int smartwatchMinWidth = 200;
+  // static const int smallPhoneMinWidth = 375;
+  // static const int phoneMinWidth = 414;
+  // static const int miniTabletMinWidth = 768;
+  // static const int tabletMinWidth = 820;
+  // static const int largeTabletMinWidth = 912;
+  // static const int computerMinWidth = 1024;
 
-  static bool isSmartwatch() => KSizes.width() <= smartwatchMinWidth;
-  static bool isSmallPhone() => KSizes.width() <= smallPhoneMinWidth;
-  static bool isPhone() => KSizes.width() <= phoneMinWidth;
-  static bool isMiniTablet() => KSizes.width() <= miniTabletMinWidth;
-  static bool isTablet() => KSizes.width() <= tabletMinWidth;
-  static bool isLargeTablet() => KSizes.width() <= largeTabletMinWidth;
-  static bool isComputer() => KSizes.width() <= computerMinWidth;
+  // static bool isSmartwatch() => KSizes.screenWidth() <= smartwatchMinWidth;
+  // static bool isSmallPhone() => KSizes.screenWidth() <= smallPhoneMinWidth;
+  // static bool isPhone() => KSizes.screenWidth() <= phoneMinWidth;
+  // static bool isMiniTablet() => KSizes.screenWidth() <= miniTabletMinWidth;
+  // static bool isTablet() => KSizes.screenWidth() <= tabletMinWidth;
+  // static bool isLargeTablet() => KSizes.screenWidth() <= largeTabletMinWidth;
+  // static bool isComputer() => KSizes.screenWidth() <= computerMinWidth;
+
+  static const int tinyHeightLimit = 100;
+  static const int tinyLimit = 270;
+  static const int phoneLimit = 550;
+  static const int tabletLimit = 800;
+  static const int largeTabletLimit = 1100;
+  static const int smallPhoneMinWidth = 375;
+  static const int smartwatchMinWidth = 200;
+  static const int miniTabletMinWidth = 768;
+
+  static bool isSmartwatch() => KSizes.screenWidth() <= smartwatchMinWidth;
+  static bool isSmallPhone() => KSizes.screenWidth() <= smallPhoneMinWidth;
+  static bool isMiniTablet() => KSizes.screenWidth() <= miniTabletMinWidth;
+
+  // static bool isTinyHeightLimit() => KSizes.screenWidth() < tinyHeightLimit;
+
+  // static bool isTinyLimit() => KSizes.screenWidth() < tinyLimit;
+
+  static bool isPhone() =>
+      KSizes.screenWidth() < phoneLimit && KSizes.screenWidth() >= tinyLimit;
+
+  static bool isTablet() =>
+      KSizes.screenWidth() < tabletLimit && KSizes.screenWidth() >= phoneLimit;
+
+  static bool isLargeTablet() =>
+      KSizes.screenWidth() < largeTabletLimit &&
+      KSizes.screenWidth() >= tabletLimit;
+
+  static bool isComputer() => KSizes.screenWidth() >= largeTabletLimit;
 
   @override
   Widget build(BuildContext context) {

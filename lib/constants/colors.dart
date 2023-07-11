@@ -22,6 +22,10 @@ class KColors {
   static const lighterShade1Secondary = Color(0xFF3B3E4C);
   static const lighterShade2Secondary = Color(0xFF444757);
 
+  static const drawerBgColor = analogous1Secondary;
+  static const appBarBgColor = analogous1Secondary;
+  static const scaffoldBgColor = analogous1Secondary;
+
   // static const pageBackGround = Color(0xFF212332);
   // static const purpleLight = Color(0XFF1e224c);
   // static const purpleDark = Color.fromARGB(255, 13, 25, 62);

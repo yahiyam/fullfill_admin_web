@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
-import 'package:fullfill_admin_web_portal/features/view/auth/login.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Obscure()),
+        ChangeNotifierProvider(create: (context) => SelectButton()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
       ],
       child: const MyApp(),
@@ -30,13 +32,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: GoogleFonts.secularOneTextTheme(),
-        // colorScheme: ColorScheme.fromSeed(seedColor: KColors.deepPurple),
-        // scaffoldBackgroundColor: KColors.purpleDark,
-        // primarySwatch: KColors.primary,
-        // canvasColor: KColors.purpleLight,
+        scaffoldBackgroundColor: KColors.scaffoldBgColor,
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: const HomePage(),
     );
   }
 }
