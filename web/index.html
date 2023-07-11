@@ -55,5 +55,22 @@
       });
     });
   </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+   
+    const firebaseConfig = {
+      apiKey: "AIzaSyB31m7RIF2SwtN44DIugo34R_aSZPRc5yo",
+      authDomain: "fullfill-a32e3.firebaseapp.com",
+      projectId: "fullfill-a32e3",
+      storageBucket: "fullfill-a32e3.appspot.com",
+      messagingSenderId: "336199550257",
+      appId: "1:336199550257:web:5b1636afd0ab767e1cdc10"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+  </script>
+
 </body>
 </html>
