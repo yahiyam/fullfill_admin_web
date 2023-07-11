@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
-import 'package:fullfill_admin_web_portal/features/data/services/admin_auth_service.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,32 +14,27 @@ class LoginButton extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (loginProvider.loginFormKey.currentState!.validate()) {
-              AdminAuthService.loginWithEmail(
-                loginProvider.emailController.toString().trim(),
-                loginProvider.passwordController.toString().trim(),
-                (String? error) {
-                  if (error == null) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
-                  } else {
-                    final snackBar = SnackBar(
-                      content: Text(
-                        error,
-                        style: const TextStyle(
-                          fontSize: 36,
-                          color: Colors.black,
-                        ),
-                      ),
-                      backgroundColor: Colors.cyan,
-                      duration: const Duration(seconds: 6),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                },
-              );
+              loginProvider.login().then(
+                    (value) => {
+                      if (loginProvider.errorMessage == null)
+                        {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          ),
+                        }
+                      else
+                        {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(loginProvider.errorMessage!),
+                            ),
+                          ),
+                        }
+                    },
+                  );
             }
           },
           child: Container(

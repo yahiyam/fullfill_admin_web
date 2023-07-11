@@ -13,4 +13,3 @@ class DrawerButtonsInfo {
     this.onTap,
   });
 }
-

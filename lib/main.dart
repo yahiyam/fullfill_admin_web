@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/login.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: KColors.scaffoldBgColor,
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? LoginPage()
+          : const HomePage(),
     );
   }
 }

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
+import 'package:fullfill_admin_web_portal/features/data/model/drawer_bottons.dart';
+import 'package:fullfill_admin_web_portal/features/view/auth/login.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/time_date.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/drawer/drawer_buttons.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,13 @@ class DrawerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<DrawerButtonsInfo> drawerButtons = [
+      DrawerButtonsInfo(title: "Home", icon: Icons.home),
+      DrawerButtonsInfo(title: "Contacts", icon: Icons.contact_phone_rounded),
+      DrawerButtonsInfo(title: "Riders", icon: Icons.delivery_dining),
+      DrawerButtonsInfo(title: "Sellers", icon: Icons.storefront),
+      DrawerButtonsInfo(title: "Users", icon: Icons.supervised_user_circle),
+    ];
     return Drawer(
       elevation: 0,
       backgroundColor: KColors.drawerBgColor,
@@ -40,7 +49,7 @@ class DrawerPage extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 children: List.generate(
-                  DrawerInfo.drawerButtons.length,
+                  drawerButtons.length,
                   (index) => Column(
                     children: [
                       Consumer<SelectButton>(
@@ -59,7 +68,7 @@ class DrawerPage extends StatelessWidget {
                                 : null,
                             child: ListTile(
                               title: Text(
-                                DrawerInfo.drawerButtons[index].title,
+                                drawerButtons[index].title,
                                 style: const TextStyle(
                                   color: KColors.neutralColor,
                                 ),
@@ -68,7 +77,7 @@ class DrawerPage extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.all(KSizes.smallPadding),
                                 child: Icon(
-                                  DrawerInfo.drawerButtons[index].icon,
+                                  drawerButtons[index].icon,
                                   color: KColors.neutralColor,
                                 ),
                               ),
@@ -81,7 +90,7 @@ class DrawerPage extends StatelessWidget {
                           );
                         },
                       ),
-                      if (index != DrawerInfo.drawerButtons.length - 1)
+                      if (index != drawerButtons.length - 1)
                         const Divider(
                           color: KColors.neutralColor,
                           thickness: 0.1,
@@ -91,8 +100,50 @@ class DrawerPage extends StatelessWidget {
                 ),
               ),
             ),
+            if (ResponsiveLayout.isComputer()) const TimeDateWidget(),
             const SizedBox(height: KSizes.padding),
-            const TimeDateWidget(),
+            ListTile(
+              title: const Text(
+                "Log out",
+                style: TextStyle(
+                  color: KColors.neutralColor,
+                ),
+              ),
+              leading: const Icon(
+                Icons.logout,
+                color: KColors.neutralColor,
+              ),
+              splashColor: KColors.drawerBgColor,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Sign Out ???'),
+                    content: const Text("Are you sure do you want to sign out"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('no'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                        },
+                        child: const Text(
+                          'yes',
+                          style: TextStyle(
+                            color: KColors.accentColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
