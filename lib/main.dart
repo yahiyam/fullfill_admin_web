@@ -12,7 +12,14 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyB31m7RIF2SwtN44DIugo34R_aSZPRc5yo",
+      projectId: "fullfill-a32e3",
+      messagingSenderId: "336199550257",
+      appId: "1:336199550257:web:5b1636afd0ab767e1cdc10",
+    ),
+  );
   runApp(
     MultiProvider(
       providers: [
