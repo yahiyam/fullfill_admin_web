@@ -5,6 +5,7 @@ import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/home/time_date.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => Obscure()),
         ChangeNotifierProvider(create: (context) => SelectButton()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],
       child: const MyApp(),
     ),
