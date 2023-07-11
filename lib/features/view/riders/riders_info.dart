@@ -1,54 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/constants/colors.dart';
-import 'package:fullfill_admin_web_portal/constants/sizes.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/widgets/type_card.dart';
+import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 
 class RidersInfo extends StatelessWidget {
   const RidersInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: KSizes.smallPadding,
-              top: KSizes.smallPadding,
-              left: KSizes.smallPadding,
-            ),
-            child: Card(
-              color: KColors.primary,
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
+    return ListView(
+      children: const [
+        DivisionHeader(title: 'Riders', count: 252),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: ResponsiveLayout(
+            tablet: DivisionSnapCard(title: 'Varified Riders', itemCount: 5),
+            computer: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child:
+                      DivisionSnapCard(title: 'Varified Riders', itemCount: 6),
                 ),
-                width: double.infinity,
-                child: const ListTile(
-                  title: Text(
-                    "Riders",
-                    style: TextStyle(
-                      color: KColors.neutralColor,
-                      fontSize: 25,
-                    ),
-                  ),
-                  trailing: Chip(
-                    shape: OvalBorder(),
-                    label: Text(
-                      "240",
-                      style: TextStyle(color: KColors.analogous1Primary),
-                    ),
-                  ),
+                Expanded(
+                  child: DivisionSnapCard(title: 'Blocked Riders', itemCount: 3),
                 ),
-              ),
+              ],
             ),
+            phone: DivisionSnapCard(title: 'Varified Riders', itemCount: 6),
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: ResponsiveLayout(
+            tablet: DivisionSnapCard(title: 'Blocked Riders', itemCount: 7),
+            computer: SizedBox(),
+            phone: DivisionSnapCard(title: 'Blocked Riders', itemCount: 2),
+          ),
+        ),
+      ],
     );
   }
 }

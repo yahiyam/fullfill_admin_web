@@ -34,51 +34,52 @@ class LoginLayout extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(40),
                   child: Consumer<LoginProvider>(
-                      builder: (context, loginProvider, _) {
-                    return Form(
-                      key: loginProvider.loginFormKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "LOG IN",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: KColors.darkerShade2Primary,
+                    builder: (context, loginProvider, _) {
+                      return Form(
+                        key: loginProvider.loginFormKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "LOG IN",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: KColors.darkerShade2Primary,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          const SizedBox(
-                            width: 40,
-                            child: Divider(
-                              color: KColors.analogous1Primary,
-                              thickness: 2,
+                            const SizedBox(height: 8),
+                            const SizedBox(
+                              width: 40,
+                              child: Divider(
+                                color: KColors.analogous1Primary,
+                                thickness: 2,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 32),
-                          CustomTextField(
-                            controller: loginProvider.emailController,
-                            labelText: 'Email address',
-                            hintText: 'Email',
-                            icon: Icons.mail_outline,
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          const SizedBox(height: 32),
-                          CustomTextField(
-                            controller: loginProvider.passwordController,
-                            obscureText: true,
-                            hintText: 'Password',
-                            labelText: 'Password',
-                            icon: Icons.password_rounded,
-                            showSuffixIcon: true,
-                          ),
-                          const SizedBox(height: 64),
-                          const LoginButton(),
-                          const SizedBox(height: 32),
-                        ],
-                      ),
-                    );
-                  }),
+                            const SizedBox(height: 32),
+                            CustomTextField(
+                              controller: loginProvider.emailController,
+                              labelText: 'Email address',
+                              hintText: 'Email',
+                              icon: Icons.mail_outline,
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            const SizedBox(height: 32),
+                            CustomTextField(
+                              controller: loginProvider.passwordController,
+                              obscureText: true,
+                              hintText: 'Password',
+                              labelText: 'Password',
+                              icon: Icons.password_rounded,
+                              showSuffixIcon: true,
+                            ),
+                            const SizedBox(height: 64),
+                            const LoginButton(),
+                            const SizedBox(height: 32),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

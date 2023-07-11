@@ -7,6 +7,7 @@ import 'package:fullfill_admin_web_portal/features/view/auth/login.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/time_date.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
+import 'package:fullfill_admin_web_portal/utils/functions/alert_message.dart';
 import 'package:provider/provider.dart';
 
 class DrawerPage extends StatelessWidget {
@@ -115,33 +116,14 @@ class DrawerPage extends StatelessWidget {
               ),
               splashColor: KColors.drawerBgColor,
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Sign Out ???'),
-                    content: const Text("Are you sure do you want to sign out"),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('no'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()));
-                        },
-                        child: const Text(
-                          'yes',
-                          style: TextStyle(
-                            color: KColors.accentColor,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                );
+                showAlertMessege(context,
+                    title: 'Sign Out ???',
+                    message: "Are you sure do you want to sign out",
+                    onOKTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                });
               },
             ),
           ],
