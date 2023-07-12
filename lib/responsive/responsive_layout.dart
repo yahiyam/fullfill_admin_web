@@ -41,7 +41,7 @@ class ResponsiveLayout extends StatelessWidget {
   static const int tinyLimit = 270;
   static const int phoneLimit = 550;
   static const int tabletLimit = 800;
-  static const int largeTabletLimit = 1100;
+  static const int largeTabletLimit = 1350;
   static const int smallPhoneMinWidth = 375;
   static const int smartwatchMinWidth = 200;
   static const int miniTabletMinWidth = 768;

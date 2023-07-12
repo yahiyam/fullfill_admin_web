@@ -29,6 +29,7 @@ class DrawerPage extends StatelessWidget {
         padding: const EdgeInsets.all(KSizes.smallPadding * 4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!ResponsiveLayout.isComputer())
               Row(
@@ -36,9 +37,7 @@ class DrawerPage extends StatelessWidget {
                 children: [
                   const SizedBox(),
                   IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                     icon: const Icon(
                       Icons.close,
                       color: KColors.neutralColor,
@@ -53,7 +52,7 @@ class DrawerPage extends StatelessWidget {
                   drawerButtons.length,
                   (index) => Column(
                     children: [
-                      Consumer<SelectButton>(
+                      Consumer<SelectedDrawer>(
                         builder: (context, selectButton, _) {
                           return Container(
                             decoration: selectButton.selectedIndex == index
@@ -83,7 +82,12 @@ class DrawerPage extends StatelessWidget {
                                 ),
                               ),
                               splashColor: KColors.primary,
-                              onTap: () => selectButton.selectIndex(index),
+                              onTap: () {
+                                selectButton.selectIndex(index);
+                                if (!ResponsiveLayout.isComputer()) {
+                                  Navigator.pop(context);
+                                }
+                              },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),

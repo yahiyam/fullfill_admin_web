@@ -26,7 +26,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Obscure()),
-        ChangeNotifierProvider(create: (context) => SelectButton()),
+        ChangeNotifierProvider(create: (context) => SelectedDrawer()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],

@@ -11,25 +11,29 @@ class TimeDateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DateTimeProvider>(
       builder: (context, dateTimeProvider, _) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              dateTimeProvider.currentTimeString,
-              style: const TextStyle(
-                fontSize: 20,
-                color: KColors.complementarySecondary,
+        return Padding(
+          padding: const EdgeInsets.only(left:20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                dateTimeProvider.currentTimeString,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: KColors.complementarySecondary,
+                ),
               ),
-            ),
-            const SizedBox(height: KSizes.smallPadding),
-            Text(
-              dateTimeProvider.currentDateString,
-              style: const TextStyle(
-                fontSize: 20,
-                color: KColors.complementarySecondary,
+              const SizedBox(height: KSizes.smallPadding),
+              Text(
+                dateTimeProvider.currentDateString,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: KColors.complementarySecondary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

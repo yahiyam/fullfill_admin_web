@@ -7,10 +7,12 @@ class DivisionSnapCard extends StatelessWidget {
     required this.title,
     this.onTap,
     required this.itemCount,
+    this.navigate,
   });
   final String title;
   final Function()? onTap;
   final int itemCount;
+  final Widget? navigate;
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +32,13 @@ class DivisionSnapCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: KColors.secondary,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
+            Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: KColors.secondary,
+                fontSize: 18,
+              ),
             ),
             ListView.builder(
               shrinkWrap: true,
@@ -53,13 +51,20 @@ class DivisionSnapCard extends StatelessWidget {
                     style: const TextStyle(
                       color: KColors.neutralColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   leading: const CircleAvatar(),
                 );
               },
             ),
             TextButton(
-              onPressed: onTap,
+              onPressed: () {
+                if (navigate != null) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => navigate!,
+                  ));
+                }
+              },
               child: const Text(
                 'show more',
                 style: TextStyle(
