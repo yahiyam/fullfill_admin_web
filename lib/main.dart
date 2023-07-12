@@ -9,6 +9,9 @@ import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provide
 import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/home/time_date.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/riders/riders_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +32,9 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => SelectedDrawer()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => DateTimeProvider()),
+        ChangeNotifierProvider(create: (context) => RiderProvider()),
+        ChangeNotifierProvider(create: (context) => SellerProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: const MyApp(),
     ),

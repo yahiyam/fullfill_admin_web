@@ -5,9 +5,11 @@ import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 class UserProvider extends ChangeNotifier {
   final List<User> _verifiedUsers = [];
   final List<User> _blockedUsers = [];
+  int _usersCount = 0;
 
   List<User> get verifiedUsers => _verifiedUsers;
   List<User> get blockedUsers => _blockedUsers;
+  int get usersCount => _usersCount;
 
   Future<void> fetchAllUsers(Function(String? error) callback) async {
     try {
@@ -30,6 +32,8 @@ class UserProvider extends ChangeNotifier {
         User user = User.fromJson(doc.data() as Map<String, dynamic>);
         blockedUsers.add(user);
       }
+      
+      _usersCount = verifiedUsers.length + blockedUsers.length;
 
       notifyListeners();
     } catch (e) {

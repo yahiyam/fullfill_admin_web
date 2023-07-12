@@ -9,7 +9,11 @@ import 'package:fullfill_admin_web_portal/features/view/users/users_info.dart';
 import 'package:fullfill_admin_web_portal/features/view/sellers/sellers_info.dart';
 import 'package:fullfill_admin_web_portal/features/view/users/users_page.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/riders/riders_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
+import 'package:fullfill_admin_web_portal/utils/functions/alert_message.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,6 +21,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ridersProvider = Provider.of<RiderProvider>(context, listen: false);
+    ridersProvider.fetchAllRiders((error) => showAlertMessege(
+          context,
+          title: 'Error fetching all riders',
+          message: error ?? 'error showing error ;)',
+        ));
+    final sellersProvider = Provider.of<SellerProvider>(context, listen: false);
+    sellersProvider.fetchAllSellers((error) => showAlertMessege(
+          context,
+          title: 'Error fetching all sellers',
+          message: error ?? 'error showing error ;)',
+        ));
+    final usersProvider = Provider.of<UserProvider>(context, listen: false);
+    usersProvider.fetchAllUsers((error) => showAlertMessege(
+          context,
+          title: 'Error fetching all users',
+          message: error ?? 'error showing error ;)',
+        ));
     return Scaffold(
       appBar: const CustumAppBar(),
       drawer: const DrawerPage(),
@@ -69,24 +91,22 @@ class HomePage extends StatelessWidget {
                   Expanded(child: SellersInfo()),
                 ])
               : drawer.selectedIndex == 1
-                  ? const Row(children: [
-                      DrawerPage(),
-                      Expanded(child: ContactsPage())
-                    ])
+                  ? const Row(
+                      children: [DrawerPage(), Expanded(child: ContactsPage())])
                   : drawer.selectedIndex == 2
                       ? const Row(children: [
-                      DrawerPage(),
-                      Expanded(child: RidersPage())
-                    ])
+                          DrawerPage(),
+                          Expanded(child: RidersPage())
+                        ])
                       : drawer.selectedIndex == 3
                           ? const Row(children: [
-                      DrawerPage(),
-                      Expanded(child: SellersPage())
-                    ])
+                              DrawerPage(),
+                              Expanded(child: SellersPage())
+                            ])
                           : const Row(children: [
-                      DrawerPage(),
-                      Expanded(child: UsersPage())
-                    ]),
+                              DrawerPage(),
+                              Expanded(child: UsersPage())
+                            ]),
         );
       }),
     );

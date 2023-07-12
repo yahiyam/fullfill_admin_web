@@ -5,9 +5,11 @@ import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 class RiderProvider extends ChangeNotifier {
   final List<Rider> _verifiedRiders = [];
   final List<Rider> _blockedRiders = [];
+  int _ridersCount = 0;
 
   List<Rider> get verifiedRiders => _verifiedRiders;
   List<Rider> get blockedRiders => _blockedRiders;
+  int get ridersCount => _ridersCount;
 
   Future<void> fetchAllRiders(Function(String? error) callback) async {
     try {
@@ -30,6 +32,8 @@ class RiderProvider extends ChangeNotifier {
         Rider rider = Rider.fromJson(doc.data() as Map<String, dynamic>);
         blockedRiders.add(rider);
       }
+
+      _ridersCount = verifiedRiders.length + blockedRiders.length;
 
       notifyListeners();
     } catch (e) {

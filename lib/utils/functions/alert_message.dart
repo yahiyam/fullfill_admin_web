@@ -28,19 +28,18 @@ Future<dynamic> showAlertMessege(
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (onOKTap != null) {
+              if (onOKTap != null)
+                ElevatedButton(
+                  onPressed: () {
                     onOKTap();
-                  }
-                },
-                child: const Center(
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(color: KColors.accentColor),
+                  },
+                  child: const Center(
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(color: KColors.accentColor),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ],
