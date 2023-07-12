@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/rider_service.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/seller_service.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/user_service.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
 
 class ProfileContainer extends StatelessWidget {
@@ -18,7 +23,7 @@ class ProfileContainer extends StatelessWidget {
     if (userDetails == null) {
       return Container();
     }
-
+    final uId = userDetails['UID'] as String;
     final name = userDetails['name'] as String;
     final email = userDetails['email'] as String;
     final dob = userDetails['dob'] as String;
@@ -109,25 +114,26 @@ class ProfileContainer extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: KColors.complementarySecondary,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.block),
-                    ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  UserService.blockAccount(uId, (error) => log(error.toString()));
+                  SellerService.blockAccount(uId, (error) => error.toString());
+                  RiderService.blockAccount(uId, (error) => error.toString());
+                },
+                icon: const Icon(
+                  Icons.block,
+                  color: KColors.accentColor,
+                ),
+                label: Text(
+                  "Block $name",
+                  overflow: TextOverflow.fade,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: KColors.accentColor,
+                    fontSize: 16,
                   ),
-                  CircleAvatar(
-                    backgroundColor: KColors.complementarySecondary,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.mail),
-                    ),
-                  ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
         ),

@@ -23,7 +23,7 @@ class Rider {
     riderAvatarUrl = json["riderAvatarUrl"];
     riderEmail = json["riderEmail"];
     riderStatus = json["status"];
-    riderDob = json["riderDob"] ?? 'not added';
-    riderPhoneNumber = json["riderPhoneNumber"] ?? 'not added';
+    riderDob = json["riderDob"] ?? 'Not specified';
+    riderPhoneNumber = json["riderPhoneNumber"] ?? 'Not specified';
   }
 }

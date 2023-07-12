@@ -23,7 +23,7 @@ class User {
     userAvatarUrl = json["userAvatarUrl"];
     userEmail = json["userEmail"];
     userStatus = json["status"];
-    userDob = json["userDob"] ?? 'not added';
-    userPhoneNumber = json["userPhoneNumber"] ?? 'not added';
+    userDob = json["userDob"] ?? 'Not specified';
+    userPhoneNumber = json["userPhoneNumber"] ?? 'Not specified';
   }
 }

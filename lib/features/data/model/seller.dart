@@ -23,7 +23,7 @@ class Seller {
     sellerAvatarUrl = json["sellerAvatarUrl"];
     sellerEmail = json["sellerEmail"];
     sellerStatus = json["status"];
-    sellerDob = json["sellerDob"] ?? 'not added';
-    sellerPhoneNumber = json["sellerPhoneNumber"] ?? 'not added';
+    sellerDob = json["sellerDob"] ?? 'Not specified';
+    sellerPhoneNumber = json["sellerPhoneNumber"] ?? 'Not specified';
   }
 }
