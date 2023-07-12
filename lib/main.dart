@@ -29,7 +29,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Obscure()),
-        ChangeNotifierProvider(create: (context) => SelectedDrawer()),
+        ChangeNotifierProvider(create: (context) => SelectedDrawerButton()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => DateTimeProvider()),
         ChangeNotifierProvider(create: (context) => RiderProvider()),

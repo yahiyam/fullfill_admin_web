@@ -13,6 +13,7 @@ class DivisionHeader extends StatelessWidget {
   final String title;
   final int count;
   final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/features/view/users/users_page.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
-import 'package:fullfill_admin_web_portal/features/view/home/widgets/type_card.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/type_card.dart';
 import 'package:provider/provider.dart';
 
 class UsersInfo extends StatelessWidget {
@@ -27,7 +26,6 @@ class UsersInfo extends StatelessWidget {
                 tablet: DivisionSnapCard(
                   title: 'Verified Users',
                   users: usersProvider.verifiedUsers,
-                  navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
                 computer: Row(
@@ -37,7 +35,6 @@ class UsersInfo extends StatelessWidget {
                       child: DivisionSnapCard(
                         title: 'Verified Users',
                         users: usersProvider.verifiedUsers,
-                        navigate: const UsersPage(),
                         isLoading: usersProvider.isLoading,
                       ),
                     ),
@@ -45,7 +42,6 @@ class UsersInfo extends StatelessWidget {
                       child: DivisionSnapCard(
                         title: 'Blocked Users',
                         users: usersProvider.blockedUsers,
-                        navigate: const UsersPage(),
                         isLoading: usersProvider.isLoading,
                       ),
                     ),
@@ -54,7 +50,6 @@ class UsersInfo extends StatelessWidget {
                 phone: DivisionSnapCard(
                   title: 'Verified Users',
                   users: usersProvider.verifiedUsers,
-                  navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
               ),
@@ -65,14 +60,12 @@ class UsersInfo extends StatelessWidget {
                 tablet: DivisionSnapCard(
                   title: 'Blocked Users',
                   users: usersProvider.blockedUsers,
-                  navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Users',
                   users: usersProvider.blockedUsers,
-                  navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
               ),

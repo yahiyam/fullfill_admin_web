@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
-import 'package:fullfill_admin_web_portal/features/view/home/widgets/type_card.dart';
-import 'package:fullfill_admin_web_portal/features/view/riders/riders_page.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/type_card.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/riders/riders_provider.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +25,6 @@ class RidersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Verified Riders',
-                  navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
                   users: ridersProvider.verifiedRiders,
                 ),
@@ -36,7 +34,6 @@ class RidersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Verified Riders',
-                        navigate: const RidersPage(),
                         isLoading: ridersProvider.isLoading,
                         users: ridersProvider.verifiedRiders,
                       ),
@@ -44,7 +41,6 @@ class RidersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Blocked Riders',
-                        navigate: const RidersPage(),
                         isLoading: ridersProvider.isLoading,
                         users: ridersProvider.blockedRiders,
                       ),
@@ -53,7 +49,6 @@ class RidersInfo extends StatelessWidget {
                 ),
                 phone: DivisionSnapCard(
                   title: 'Verified Riders',
-                  navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
                   users: ridersProvider.verifiedRiders,
                 ),
@@ -64,14 +59,12 @@ class RidersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Blocked Riders',
-                  navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
                   users: ridersProvider.blockedRiders,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Riders',
-                  navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
                   users: ridersProvider.blockedRiders,
                 ),

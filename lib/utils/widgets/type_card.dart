@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
+import 'package:provider/provider.dart';
 
 class DivisionSnapCard extends StatelessWidget {
   const DivisionSnapCard({
     super.key,
     required this.title,
     required this.users,
-    this.navigate,
     required this.isLoading,
   });
 
   final String title;
   final List<dynamic> users;
-  final Widget? navigate;
   final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    final bool isHome =
+        Provider.of<SelectedDrawerButton>(context).selectedDrawer == 0;
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -43,7 +45,14 @@ class DivisionSnapCard extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            if (isLoading) const Center(child: CircularProgressIndicator()),
+            if (isLoading)
+              const Center(
+                  child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: LinearProgressIndicator(
+                  color: KColors.complementarySecondary,
+                ),
+              )),
             if (!isLoading)
               ListView.builder(
                 shrinkWrap: true,
@@ -66,6 +75,14 @@ class DivisionSnapCard extends StatelessWidget {
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
+                    onTap: () {
+                      if (!isHome) {
+                        final profileIndex = Provider.of<SelectedProfileButton>(
+                            context,
+                            listen: false);
+                        profileIndex.selectProfile(index);
+                      }
+                    },
                     leading: CircleAvatar(
                       backgroundColor: KColors.avatarBgColor,
                       child: Text(
@@ -79,24 +96,6 @@ class DivisionSnapCard extends StatelessWidget {
                     ),
                   );
                 },
-              ),
-            if (users.isNotEmpty)
-              TextButton(
-                onPressed: () {
-                  if (navigate != null) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => navigate!,
-                      ),
-                    );
-                  }
-                },
-                child: const Text(
-                  'Show more',
-                  style: TextStyle(
-                    color: KColors.analogous1Primary,
-                  ),
-                ),
               ),
             if (users.isEmpty && !isLoading)
               Container(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/features/view/sellers/sellers_page.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
-import 'package:fullfill_admin_web_portal/features/view/home/widgets/type_card.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/type_card.dart';
 import 'package:provider/provider.dart';
 
 class SellersInfo extends StatelessWidget {
@@ -27,7 +26,6 @@ class SellersInfo extends StatelessWidget {
                 tablet: DivisionSnapCard(
                   title: 'Verified Sellers',
                   users: sellersProvider.verifiedSellers,
-                  navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
                 computer: Row(
@@ -37,7 +35,6 @@ class SellersInfo extends StatelessWidget {
                       child: DivisionSnapCard(
                         title: 'Verified Sellers',
                         users: sellersProvider.verifiedSellers,
-                        navigate: const SellersPage(),
                         isLoading: sellersProvider.isLoading,
                       ),
                     ),
@@ -45,7 +42,6 @@ class SellersInfo extends StatelessWidget {
                       child: DivisionSnapCard(
                         title: 'Blocked Sellers',
                         users: sellersProvider.blockedSellers,
-                        navigate: const SellersPage(),
                         isLoading: sellersProvider.isLoading,
                       ),
                     ),
@@ -54,7 +50,6 @@ class SellersInfo extends StatelessWidget {
                 phone: DivisionSnapCard(
                   title: 'Verified Sellers',
                   users: sellersProvider.verifiedSellers,
-                  navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
               ),
@@ -65,14 +60,12 @@ class SellersInfo extends StatelessWidget {
                 tablet: DivisionSnapCard(
                   title: 'Blocked Sellers',
                   users: sellersProvider.blockedSellers,
-                  navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Sellers',
                   users: sellersProvider.blockedSellers,
-                  navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
               ),

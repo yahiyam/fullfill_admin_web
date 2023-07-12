@@ -2,31 +2,31 @@ import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 
-Map<String, dynamic>? getUserDetails(dynamic item) {
+Map<String, dynamic>? getUserDetails(dynamic user) {
   String? name;
   String? avatarUrl;
   String? email;
   String? dob;
   String? phoneNumber;
 
-  if (item is User) {
-    name = item.userName ?? 'Not specified';
-    avatarUrl = item.userAvatarUrl ?? '';
-    email = item.userEmail ?? '';
-    dob = item.userDob ?? 'Not specified';
-    phoneNumber = item.userPhoneNumber ?? 'Not specified';
-  } else if (item is Seller) {
-    name = item.sellerName ?? 'Not specified';
-    avatarUrl = item.sellerAvatarUrl ?? '';
-    email = item.sellerEmail ?? '';
-    dob = item.sellerDob ?? 'Not specified';
-    phoneNumber = item.sellerPhoneNumber ?? 'Not specified';
-  } else if (item is Rider) {
-    name = item.riderName ?? 'Not specified';
-    avatarUrl = item.riderAvatarUrl ?? '';
-    email = item.riderEmail ?? '';
-    dob = item.riderDob ?? 'Not specified';
-    phoneNumber = item.riderPhoneNumber ?? 'Not specified';
+  if (user is User) {
+    name = user.userName ?? 'Not specified';
+    avatarUrl = user.userAvatarUrl ?? '';
+    email = user.userEmail ?? '';
+    dob = user.userDob ?? 'Not specified';
+    phoneNumber = user.userPhoneNumber ?? 'Not specified';
+  } else if (user is Seller) {
+    name = user.sellerName ?? 'Not specified';
+    avatarUrl = user.sellerAvatarUrl ?? '';
+    email = user.sellerEmail ?? '';
+    dob = user.sellerDob ?? 'Not specified';
+    phoneNumber = user.sellerPhoneNumber ?? 'Not specified';
+  } else if (user is Rider) {
+    name = user.riderName ?? 'Not specified';
+    avatarUrl = user.riderAvatarUrl ?? '';
+    email = user.riderEmail ?? '';
+    dob = user.riderDob ?? 'Not specified';
+    phoneNumber = user.riderPhoneNumber ?? 'Not specified';
   } else {
     return null;
   }

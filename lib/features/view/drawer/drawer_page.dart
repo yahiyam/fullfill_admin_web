@@ -52,10 +52,10 @@ class DrawerPage extends StatelessWidget {
                   drawerButtons.length,
                   (index) => Column(
                     children: [
-                      Consumer<SelectedDrawer>(
+                      Consumer<SelectedDrawerButton>(
                         builder: (context, selectButton, _) {
                           return Container(
-                            decoration: selectButton.selectedIndex == index
+                            decoration: selectButton.selectedDrawer == index
                                 ? BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     gradient: LinearGradient(
@@ -83,7 +83,7 @@ class DrawerPage extends StatelessWidget {
                               ),
                               splashColor: KColors.primary,
                               onTap: () {
-                                selectButton.selectIndex(index);
+                                selectButton.selectDrawer(index);
                                 if (!ResponsiveLayout.isComputer()) {
                                   Navigator.pop(context);
                                 }

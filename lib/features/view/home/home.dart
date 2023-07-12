@@ -42,37 +42,37 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: const CustumAppBar(),
       drawer: const DrawerPage(),
-      body: Consumer<SelectedDrawer>(builder: (context, drawer, _) {
+      body: Consumer<SelectedDrawerButton>(builder: (context, drawer, _) {
         return ResponsiveLayout(
           smartwatch: Container(),
-          phone: drawer.selectedIndex == 0
+          phone: drawer.selectedDrawer == 0
               ? const Column(children: [
                   Flexible(child: SellersInfo()),
                   Flexible(child: UsersInfo()),
                   Flexible(child: RidersInfo()),
                 ])
-              : drawer.selectedIndex == 1
+              : drawer.selectedDrawer == 1
                   ? const ContactsPage()
-                  : drawer.selectedIndex == 2
-                      ? const RidersInfo()
-                      : drawer.selectedIndex == 3
-                          ? const SellersInfo()
-                          : const UsersInfo(),
-          tablet: drawer.selectedIndex == 0
+                  : drawer.selectedDrawer == 2
+                      ? const RidersPage()
+                      : drawer.selectedDrawer == 3
+                          ? const SellersPage()
+                          : const UsersPage(),
+          tablet: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                       Expanded(child: UsersInfo()),
                       Expanded(child: SellersInfo()),
                     ])
-              : drawer.selectedIndex == 1
+              : drawer.selectedDrawer == 1
                   ? const ContactsPage()
-                  : drawer.selectedIndex == 2
+                  : drawer.selectedDrawer == 2
                       ? const RidersPage()
-                      : drawer.selectedIndex == 3
+                      : drawer.selectedDrawer == 3
                           ? const SellersPage()
                           : const UsersPage(),
-          largeTablet: drawer.selectedIndex == 0
+          largeTablet: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,14 +80,14 @@ class HomePage extends StatelessWidget {
                       Expanded(child: RidersInfo()),
                       Expanded(child: SellersInfo()),
                     ])
-              : drawer.selectedIndex == 1
+              : drawer.selectedDrawer == 1
                   ? const ContactsPage()
-                  : drawer.selectedIndex == 2
+                  : drawer.selectedDrawer == 2
                       ? const RidersPage()
-                      : drawer.selectedIndex == 3
+                      : drawer.selectedDrawer == 3
                           ? const SellersPage()
                           : const UsersPage(),
-          computer: drawer.selectedIndex == 0
+          computer: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,18 +96,18 @@ class HomePage extends StatelessWidget {
                       Expanded(child: RidersInfo()),
                       Expanded(child: SellersInfo()),
                     ])
-              : drawer.selectedIndex == 1
+              : drawer.selectedDrawer == 1
                   ? const Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [DrawerPage(), Expanded(child: ContactsPage())])
-                  : drawer.selectedIndex == 2
+                  : drawer.selectedDrawer == 2
                       ? const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                               DrawerPage(),
                               Expanded(child: RidersPage())
                             ])
-                      : drawer.selectedIndex == 3
+                      : drawer.selectedDrawer == 3
                           ? const Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
