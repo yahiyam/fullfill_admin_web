@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 
 class RiderProvider extends ChangeNotifier {
-  final List<Rider> _verifiedRiders = [];
-  final List<Rider> _blockedRiders = [];
+  List<Rider> _verifiedRiders = [];
+  List<Rider> _blockedRiders = [];
   int _ridersCount = 0;
+  bool _isLoading = false;
 
   List<Rider> get verifiedRiders => _verifiedRiders;
   List<Rider> get blockedRiders => _blockedRiders;
   int get ridersCount => _ridersCount;
+  bool get isLoading => _isLoading;
 
   Future<void> fetchAllRiders(Function(String? error) callback) async {
     try {
+      _isLoading = true;
+
       QuerySnapshot verifiedSnapshot = await FirebaseFirestore.instance
           .collection('riders')
           .where('status', isEqualTo: 'approved')
@@ -23,21 +27,22 @@ class RiderProvider extends ChangeNotifier {
           .where('status', isEqualTo: 'blocked')
           .get();
 
-      for (QueryDocumentSnapshot doc in verifiedSnapshot.docs) {
-        Rider rider = Rider.fromJson(doc.data() as Map<String, dynamic>);
-        verifiedRiders.add(rider);
-      }
+      _verifiedRiders = verifiedSnapshot.docs.map((doc) {
+        return Rider.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
 
-      for (QueryDocumentSnapshot doc in blockedSnapshot.docs) {
-        Rider rider = Rider.fromJson(doc.data() as Map<String, dynamic>);
-        blockedRiders.add(rider);
-      }
+      _blockedRiders = blockedSnapshot.docs.map((doc) {
+        return Rider.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
 
-      _ridersCount = verifiedRiders.length + blockedRiders.length;
+      _ridersCount = _verifiedRiders.length + _blockedRiders.length;
 
+      _isLoading = false;
       notifyListeners();
-    } catch (e) {
-      callback(e.toString());
+    } catch (error) {
+      _isLoading = false;
+      notifyListeners();
+      callback(error.toString());
     }
   }
 }

@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
 
 class SellerProvider extends ChangeNotifier {
-  final List<Seller> _verifiedSellers = [];
-  final List<Seller> _blockedSellers = [];
+  List<Seller> _verifiedSellers = [];
+  List<Seller> _blockedSellers = [];
   int _sellersCount = 0;
+  bool _isLoading = false;
 
   List<Seller> get verifiedSellers => _verifiedSellers;
   List<Seller> get blockedSellers => _blockedSellers;
   int get sellersCount => _sellersCount;
+  bool get isLoading => _isLoading;
 
   Future<void> fetchAllSellers(Function(String? error) callback) async {
     try {
+      _isLoading = true;
+
       QuerySnapshot verifiedSnapshot = await FirebaseFirestore.instance
           .collection('sellers')
           .where('status', isEqualTo: 'approved')
@@ -23,21 +27,22 @@ class SellerProvider extends ChangeNotifier {
           .where('status', isEqualTo: 'blocked')
           .get();
 
-      for (QueryDocumentSnapshot doc in verifiedSnapshot.docs) {
-        Seller seller = Seller.fromJson(doc.data() as Map<String, dynamic>);
-        verifiedSellers.add(seller);
-      }
+      _verifiedSellers = verifiedSnapshot.docs.map((doc) {
+        return Seller.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
 
-      for (QueryDocumentSnapshot doc in blockedSnapshot.docs) {
-        Seller seller = Seller.fromJson(doc.data() as Map<String, dynamic>);
-        blockedSellers.add(seller);
-      }
+      _blockedSellers = blockedSnapshot.docs.map((doc) {
+        return Seller.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
 
-      _sellersCount = verifiedSellers.length + blockedSellers.length;
+      _sellersCount = _verifiedSellers.length + _blockedSellers.length;
 
+      _isLoading = false;
       notifyListeners();
-    } catch (e) {
-      callback(e.toString());
+    } catch (error) {
+      _isLoading = false;
+      notifyListeners();
+      callback(error.toString());
     }
   }
 }

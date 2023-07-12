@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  final List<User> _verifiedUsers = [];
-  final List<User> _blockedUsers = [];
+  List<User> _verifiedUsers = [];
+  List<User> _blockedUsers = [];
   int _usersCount = 0;
+  bool _isLoading = false;
 
   List<User> get verifiedUsers => _verifiedUsers;
   List<User> get blockedUsers => _blockedUsers;
   int get usersCount => _usersCount;
+  bool get isLoading => _isLoading;
 
   Future<void> fetchAllUsers(Function(String? error) callback) async {
     try {
+      _isLoading = true;
+
       QuerySnapshot verifiedSnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('status', isEqualTo: 'approved')
@@ -23,21 +27,22 @@ class UserProvider extends ChangeNotifier {
           .where('status', isEqualTo: 'blocked')
           .get();
 
-      for (QueryDocumentSnapshot doc in verifiedSnapshot.docs) {
-        User user = User.fromJson(doc.data() as Map<String, dynamic>);
-        verifiedUsers.add(user);
-      }
+      _verifiedUsers = verifiedSnapshot.docs.map((doc) {
+        return User.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
 
-      for (QueryDocumentSnapshot doc in blockedSnapshot.docs) {
-        User user = User.fromJson(doc.data() as Map<String, dynamic>);
-        blockedUsers.add(user);
-      }
+      _blockedUsers = blockedSnapshot.docs.map((doc) {
+        return User.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
       
-      _usersCount = verifiedUsers.length + blockedUsers.length;
+      _usersCount = _verifiedUsers.length + _blockedUsers.length;
 
+      _isLoading = false;
       notifyListeners();
-    } catch (e) {
-      callback(e.toString());
+    } catch (error) {
+      _isLoading = false;
+      notifyListeners();
+      callback(error.toString());
     }
   }
 }

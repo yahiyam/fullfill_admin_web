@@ -59,10 +59,12 @@ class HomePage extends StatelessWidget {
                           ? const SellersInfo()
                           : const UsersInfo(),
           tablet: drawer.selectedIndex == 0
-              ? const Row(children: [
-                  Expanded(child: UsersInfo()),
-                  Expanded(child: SellersInfo()),
-                ])
+              ? const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                      Expanded(child: UsersInfo()),
+                      Expanded(child: SellersInfo()),
+                    ])
               : drawer.selectedIndex == 1
                   ? const ContactsPage()
                   : drawer.selectedIndex == 2
@@ -71,11 +73,13 @@ class HomePage extends StatelessWidget {
                           ? const SellersPage()
                           : const UsersPage(),
           largeTablet: drawer.selectedIndex == 0
-              ? const Row(children: [
-                  Expanded(child: UsersInfo()),
-                  Expanded(child: RidersInfo()),
-                  Expanded(child: SellersInfo()),
-                ])
+              ? const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                      Expanded(child: UsersInfo()),
+                      Expanded(child: RidersInfo()),
+                      Expanded(child: SellersInfo()),
+                    ])
               : drawer.selectedIndex == 1
                   ? const ContactsPage()
                   : drawer.selectedIndex == 2
@@ -84,29 +88,38 @@ class HomePage extends StatelessWidget {
                           ? const SellersPage()
                           : const UsersPage(),
           computer: drawer.selectedIndex == 0
-              ? const Row(children: [
-                  DrawerPage(),
-                  Expanded(child: UsersInfo()),
-                  Expanded(child: RidersInfo()),
-                  Expanded(child: SellersInfo()),
-                ])
+              ? const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                      DrawerPage(),
+                      Expanded(child: UsersInfo()),
+                      Expanded(child: RidersInfo()),
+                      Expanded(child: SellersInfo()),
+                    ])
               : drawer.selectedIndex == 1
                   ? const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [DrawerPage(), Expanded(child: ContactsPage())])
                   : drawer.selectedIndex == 2
-                      ? const Row(children: [
-                          DrawerPage(),
-                          Expanded(child: RidersPage())
-                        ])
-                      : drawer.selectedIndex == 3
-                          ? const Row(children: [
+                      ? const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                               DrawerPage(),
-                              Expanded(child: SellersPage())
+                              Expanded(child: RidersPage())
                             ])
-                          : const Row(children: [
-                              DrawerPage(),
-                              Expanded(child: UsersPage())
-                            ]),
+                      : drawer.selectedIndex == 3
+                          ? const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                  DrawerPage(),
+                                  Expanded(child: SellersPage())
+                                ])
+                          : const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                  DrawerPage(),
+                                  Expanded(child: UsersPage())
+                                ]),
         );
       }),
     );

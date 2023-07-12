@@ -7,10 +7,12 @@ class DivisionHeader extends StatelessWidget {
     super.key,
     required this.title,
     required this.count,
+    required this.isLoading,
   });
 
   final String title;
   final int count;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,13 +41,15 @@ class DivisionHeader extends StatelessWidget {
                 fontSize: 25,
               ),
             ),
-            trailing: Chip(
-              shape: const OvalBorder(),
-              label: Text(
-                count.toString(),
-                style: const TextStyle(color: KColors.analogous1Primary),
-              ),
-            ),
+            trailing: !isLoading
+                ? Chip(
+                    shape: const OvalBorder(),
+                    label: Text(
+                      count.toString(),
+                      style: const TextStyle(color: KColors.analogous1Primary),
+                    ),
+                  )
+                : const SizedBox(),
           ),
         ),
       ),

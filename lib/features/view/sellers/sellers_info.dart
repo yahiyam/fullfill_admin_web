@@ -17,7 +17,10 @@ class SellersInfo extends StatelessWidget {
           shrinkWrap: true,
           children: [
             DivisionHeader(
-                title: 'Sellers', count: sellersProvider.sellersCount),
+              title: 'Sellers',
+              count: sellersProvider.sellersCount,
+              isLoading: sellersProvider.isLoading,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ResponsiveLayout(
@@ -25,6 +28,7 @@ class SellersInfo extends StatelessWidget {
                   title: 'Varified Sellers',
                   itemCount: sellersProvider.verifiedSellers.length,
                   navigate: const SellersPage(),
+                  isLoading: sellersProvider.isLoading,
                 ),
                 computer: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +38,7 @@ class SellersInfo extends StatelessWidget {
                         title: 'Verified Sellers',
                         itemCount: sellersProvider.verifiedSellers.length,
                         navigate: const SellersPage(),
+                        isLoading: sellersProvider.isLoading,
                       ),
                     ),
                     Expanded(
@@ -41,6 +46,7 @@ class SellersInfo extends StatelessWidget {
                         title: 'Blocked Sellers',
                         itemCount: sellersProvider.blockedSellers.length,
                         navigate: const SellersPage(),
+                        isLoading: sellersProvider.isLoading,
                       ),
                     ),
                   ],
@@ -49,6 +55,7 @@ class SellersInfo extends StatelessWidget {
                   title: 'Varified Sellers',
                   itemCount: sellersProvider.verifiedSellers.length,
                   navigate: const SellersPage(),
+                  isLoading: sellersProvider.isLoading,
                 ),
               ),
             ),
@@ -59,12 +66,14 @@ class SellersInfo extends StatelessWidget {
                   title: 'Blocked Sellers',
                   itemCount: sellersProvider.blockedSellers.length,
                   navigate: const SellersPage(),
+                  isLoading: sellersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Sellers',
                   itemCount: sellersProvider.blockedSellers.length,
                   navigate: const SellersPage(),
+                  isLoading: sellersProvider.isLoading,
                 ),
               ),
             ),

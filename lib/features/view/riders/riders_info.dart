@@ -16,7 +16,11 @@ class RidersInfo extends StatelessWidget {
         return ListView(
           shrinkWrap: true,
           children: [
-            DivisionHeader(title: 'Riders', count: ridersProvider.ridersCount),
+            DivisionHeader(
+              title: 'Riders',
+              count: ridersProvider.ridersCount,
+              isLoading: ridersProvider.isLoading,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ResponsiveLayout(
@@ -24,6 +28,7 @@ class RidersInfo extends StatelessWidget {
                   title: 'Varified Riders',
                   itemCount: ridersProvider.verifiedRiders.length,
                   navigate: const RidersPage(),
+                  isLoading: ridersProvider.isLoading,
                 ),
                 computer: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +38,7 @@ class RidersInfo extends StatelessWidget {
                         title: 'Verified Riders',
                         itemCount: ridersProvider.verifiedRiders.length,
                         navigate: const RidersPage(),
+                        isLoading: ridersProvider.isLoading,
                       ),
                     ),
                     Expanded(
@@ -40,6 +46,7 @@ class RidersInfo extends StatelessWidget {
                         title: 'Blocked Riders',
                         itemCount: ridersProvider.blockedRiders.length,
                         navigate: const RidersPage(),
+                        isLoading: ridersProvider.isLoading,
                       ),
                     ),
                   ],
@@ -48,6 +55,7 @@ class RidersInfo extends StatelessWidget {
                   title: 'Varified Riders',
                   itemCount: ridersProvider.verifiedRiders.length,
                   navigate: const RidersPage(),
+                  isLoading: ridersProvider.isLoading,
                 ),
               ),
             ),
@@ -58,12 +66,14 @@ class RidersInfo extends StatelessWidget {
                   title: 'Blocked Riders',
                   itemCount: ridersProvider.blockedRiders.length,
                   navigate: const RidersPage(),
+                  isLoading: ridersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Riders',
                   itemCount: ridersProvider.blockedRiders.length,
                   navigate: const RidersPage(),
+                  isLoading: ridersProvider.isLoading,
                 ),
               ),
             ),

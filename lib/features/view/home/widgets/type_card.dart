@@ -5,14 +5,14 @@ class DivisionSnapCard extends StatelessWidget {
   const DivisionSnapCard({
     super.key,
     required this.title,
-    this.onTap,
     required this.itemCount,
     this.navigate,
+    required this.isLoading,
   });
   final String title;
-  final Function()? onTap;
   final int itemCount;
   final Widget? navigate;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,9 @@ class DivisionSnapCard extends StatelessWidget {
         horizontal: 10,
       ),
       decoration: BoxDecoration(
-          color: KColors.lighterShade2Secondary,
-          borderRadius: BorderRadius.circular(10)),
+        color: KColors.lighterShade2Secondary,
+        borderRadius: BorderRadius.circular(10),
+      ),
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -40,38 +41,51 @@ class DivisionSnapCard extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    'blocked user $index',
-                    style: const TextStyle(
-                      color: KColors.neutralColor,
+            if (isLoading) const Center(child: CircularProgressIndicator()),
+            if (!isLoading)
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      'blocked user $index',
+                      style: const TextStyle(
+                        color: KColors.neutralColor,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
+                    leading: const CircleAvatar(),
+                  );
+                },
+              ),
+            if (itemCount != 0)
+              TextButton(
+                onPressed: () {
+                  if (navigate != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => navigate!,
+                    ));
+                  }
+                },
+                child: const Text(
+                  'show more',
+                  style: TextStyle(
+                    color: KColors.analogous1Primary,
                   ),
-                  leading: const CircleAvatar(),
-                );
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                if (navigate != null) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => navigate!,
-                  ));
-                }
-              },
-              child: const Text(
-                'show more',
-                style: TextStyle(
-                  color: KColors.analogous1Primary,
                 ),
               ),
-            ),
+            if (itemCount == 0 && !isLoading)
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: const Text(
+                  "Its Empty",
+                  style: TextStyle(
+                    color: KColors.neutralColor,
+                  ),
+                ),
+              )
           ],
         ),
       ),

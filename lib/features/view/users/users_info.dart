@@ -16,7 +16,11 @@ class UsersInfo extends StatelessWidget {
         return ListView(
           shrinkWrap: true,
           children: [
-            DivisionHeader(title: 'Users', count: usersProvider.usersCount),
+            DivisionHeader(
+              title: 'Users',
+              count: usersProvider.usersCount,
+              isLoading: usersProvider.isLoading,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ResponsiveLayout(
@@ -24,6 +28,7 @@ class UsersInfo extends StatelessWidget {
                   title: 'Verified Users',
                   itemCount: usersProvider.verifiedUsers.length,
                   navigate: const UsersPage(),
+                  isLoading: usersProvider.isLoading,
                 ),
                 computer: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +38,7 @@ class UsersInfo extends StatelessWidget {
                         title: 'Verified Users',
                         itemCount: usersProvider.verifiedUsers.length,
                         navigate: const UsersPage(),
+                        isLoading: usersProvider.isLoading,
                       ),
                     ),
                     Expanded(
@@ -40,6 +46,7 @@ class UsersInfo extends StatelessWidget {
                         title: 'Blocked Users',
                         itemCount: usersProvider.blockedUsers.length,
                         navigate: const UsersPage(),
+                        isLoading: usersProvider.isLoading,
                       ),
                     ),
                   ],
@@ -48,6 +55,7 @@ class UsersInfo extends StatelessWidget {
                   title: 'Varified Users',
                   itemCount: usersProvider.verifiedUsers.length,
                   navigate: const UsersPage(),
+                  isLoading: usersProvider.isLoading,
                 ),
               ),
             ),
@@ -58,12 +66,14 @@ class UsersInfo extends StatelessWidget {
                   title: 'Blocked Users',
                   itemCount: usersProvider.blockedUsers.length,
                   navigate: const UsersPage(),
+                  isLoading: usersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Users',
                   itemCount: usersProvider.blockedUsers.length,
                   navigate: const UsersPage(),
+                  isLoading: usersProvider.isLoading,
                 ),
               ),
             ),
