@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
+import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
 
 class DivisionSnapCard extends StatelessWidget {
   const DivisionSnapCard({
     super.key,
     required this.title,
-    required this.itemCount,
+    required this.users,
     this.navigate,
     required this.isLoading,
   });
+
   final String title;
-  final int itemCount;
+  final List<dynamic> users;
   final Widget? navigate;
   final bool isLoading;
 
@@ -46,46 +48,66 @@ class DivisionSnapCard extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: itemCount,
+                itemCount: users.length,
                 itemBuilder: (context, index) {
+                  final user = users[index];
+                  final userDetails = getUserDetails(user);
+
+                  if (userDetails == null) {
+                    return Container();
+                  }
+                  final userName = userDetails['name'];
                   return ListTile(
                     title: Text(
-                      'blocked user $index',
+                      userName,
                       style: const TextStyle(
                         color: KColors.neutralColor,
+                        fontSize: 18,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    leading: const CircleAvatar(),
+                    leading: CircleAvatar(
+                      backgroundColor: KColors.avatarBgColor,
+                      child: Text(
+                        userName[0],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
-            if (itemCount != 0)
+            if (users.isNotEmpty)
               TextButton(
                 onPressed: () {
                   if (navigate != null) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => navigate!,
-                    ));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => navigate!,
+                      ),
+                    );
                   }
                 },
                 child: const Text(
-                  'show more',
+                  'Show more',
                   style: TextStyle(
                     color: KColors.analogous1Primary,
                   ),
                 ),
               ),
-            if (itemCount == 0 && !isLoading)
+            if (users.isEmpty && !isLoading)
               Container(
                 margin: const EdgeInsets.all(10),
                 child: const Text(
-                  "Its Empty",
+                  "It's empty",
                   style: TextStyle(
                     color: KColors.neutralColor,
                   ),
                 ),
-              )
+              ),
           ],
         ),
       ),

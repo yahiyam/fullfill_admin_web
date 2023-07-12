@@ -25,10 +25,10 @@ class RidersInfo extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
-                  title: 'Varified Riders',
-                  itemCount: ridersProvider.verifiedRiders.length,
+                  title: 'Verified Riders',
                   navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
+                  users: ridersProvider.verifiedRiders,
                 ),
                 computer: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,26 +36,26 @@ class RidersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Verified Riders',
-                        itemCount: ridersProvider.verifiedRiders.length,
                         navigate: const RidersPage(),
                         isLoading: ridersProvider.isLoading,
+                        users: ridersProvider.verifiedRiders,
                       ),
                     ),
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Blocked Riders',
-                        itemCount: ridersProvider.blockedRiders.length,
                         navigate: const RidersPage(),
                         isLoading: ridersProvider.isLoading,
+                        users: ridersProvider.blockedRiders,
                       ),
                     ),
                   ],
                 ),
                 phone: DivisionSnapCard(
-                  title: 'Varified Riders',
-                  itemCount: ridersProvider.verifiedRiders.length,
+                  title: 'Verified Riders',
                   navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
+                  users: ridersProvider.verifiedRiders,
                 ),
               ),
             ),
@@ -64,16 +64,16 @@ class RidersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Blocked Riders',
-                  itemCount: ridersProvider.blockedRiders.length,
                   navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
+                  users: ridersProvider.blockedRiders,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Riders',
-                  itemCount: ridersProvider.blockedRiders.length,
                   navigate: const RidersPage(),
                   isLoading: ridersProvider.isLoading,
+                  users: ridersProvider.blockedRiders,
                 ),
               ),
             ),

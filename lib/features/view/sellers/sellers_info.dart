@@ -25,8 +25,8 @@ class SellersInfo extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
-                  title: 'Varified Sellers',
-                  itemCount: sellersProvider.verifiedSellers.length,
+                  title: 'Verified Sellers',
+                  users: sellersProvider.verifiedSellers,
                   navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
@@ -36,7 +36,7 @@ class SellersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Verified Sellers',
-                        itemCount: sellersProvider.verifiedSellers.length,
+                        users: sellersProvider.verifiedSellers,
                         navigate: const SellersPage(),
                         isLoading: sellersProvider.isLoading,
                       ),
@@ -44,7 +44,7 @@ class SellersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Blocked Sellers',
-                        itemCount: sellersProvider.blockedSellers.length,
+                        users: sellersProvider.blockedSellers,
                         navigate: const SellersPage(),
                         isLoading: sellersProvider.isLoading,
                       ),
@@ -52,8 +52,8 @@ class SellersInfo extends StatelessWidget {
                   ],
                 ),
                 phone: DivisionSnapCard(
-                  title: 'Varified Sellers',
-                  itemCount: sellersProvider.verifiedSellers.length,
+                  title: 'Verified Sellers',
+                  users: sellersProvider.verifiedSellers,
                   navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
@@ -64,14 +64,14 @@ class SellersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Blocked Sellers',
-                  itemCount: sellersProvider.blockedSellers.length,
+                  users: sellersProvider.blockedSellers,
                   navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Sellers',
-                  itemCount: sellersProvider.blockedSellers.length,
+                  users: sellersProvider.blockedSellers,
                   navigate: const SellersPage(),
                   isLoading: sellersProvider.isLoading,
                 ),

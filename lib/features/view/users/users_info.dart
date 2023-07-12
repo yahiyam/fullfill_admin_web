@@ -26,7 +26,7 @@ class UsersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Verified Users',
-                  itemCount: usersProvider.verifiedUsers.length,
+                  users: usersProvider.verifiedUsers,
                   navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
@@ -36,7 +36,7 @@ class UsersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Verified Users',
-                        itemCount: usersProvider.verifiedUsers.length,
+                        users: usersProvider.verifiedUsers,
                         navigate: const UsersPage(),
                         isLoading: usersProvider.isLoading,
                       ),
@@ -44,7 +44,7 @@ class UsersInfo extends StatelessWidget {
                     Expanded(
                       child: DivisionSnapCard(
                         title: 'Blocked Users',
-                        itemCount: usersProvider.blockedUsers.length,
+                        users: usersProvider.blockedUsers,
                         navigate: const UsersPage(),
                         isLoading: usersProvider.isLoading,
                       ),
@@ -52,8 +52,8 @@ class UsersInfo extends StatelessWidget {
                   ],
                 ),
                 phone: DivisionSnapCard(
-                  title: 'Varified Users',
-                  itemCount: usersProvider.verifiedUsers.length,
+                  title: 'Verified Users',
+                  users: usersProvider.verifiedUsers,
                   navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
@@ -64,14 +64,14 @@ class UsersInfo extends StatelessWidget {
               child: ResponsiveLayout(
                 tablet: DivisionSnapCard(
                   title: 'Blocked Users',
-                  itemCount: usersProvider.blockedUsers.length,
+                  users: usersProvider.blockedUsers,
                   navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
                 computer: const SizedBox(),
                 phone: DivisionSnapCard(
                   title: 'Blocked Users',
-                  itemCount: usersProvider.blockedUsers.length,
+                  users: usersProvider.blockedUsers,
                   navigate: const UsersPage(),
                   isLoading: usersProvider.isLoading,
                 ),
