@@ -13,8 +13,8 @@ import 'package:provider/provider.dart';
 
 class ProfileContainer extends StatefulWidget {
   final dynamic user;
-
   final bool isBlocked;
+
   const ProfileContainer({
     super.key,
     required this.user,

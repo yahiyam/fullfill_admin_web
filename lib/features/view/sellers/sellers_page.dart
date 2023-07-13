@@ -12,33 +12,33 @@ class SellersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<SelectedProfileButton>(
       create: (context) => SelectedProfileButton(),
       builder: (context, child) {
         return Scaffold(
           body: Consumer2<SellerProvider, SelectedProfileButton>(
             builder: (context, sellersP, profileP, _) {
               final selectedProfile = profileP.selectedProfile;
-              final verifiedUsers = sellersP.verifiedSellers;
-              final blockedUsers = sellersP.blockedSellers;
+              final verifiedSellers = sellersP.verifiedSellers;
+              final blockedSellers = sellersP.blockedSellers;
 
-              List<dynamic> users;
-              if (verifiedUsers.isNotEmpty) {
-                users = verifiedUsers;
+              List<dynamic> sellers;
+              if (verifiedSellers.isNotEmpty) {
+                sellers = verifiedSellers;
               } else {
-                users = blockedUsers;
+                sellers = blockedSellers;
               }
 
-              if (selectedProfile >= 0 && selectedProfile < users.length) {
-                final selectedUser = users[selectedProfile];
+              if (selectedProfile >= 0 && selectedProfile < sellers.length) {
+                final selectedSeller = sellers[selectedProfile];
 
                 return ResponsiveLayout(
                   phone: Column(
                     children: [
                       ProfileContainer(
-                        user: selectedUser,
+                        user: selectedSeller,
                         isBlocked:
-                            sellersP.blockedSellers.contains(selectedUser),
+                            sellersP.blockedSellers.contains(selectedSeller),
                       ),
                       const SizedBox(height: KSizes.padding),
                       Padding(
@@ -62,9 +62,9 @@ class SellersPage extends StatelessWidget {
                   tablet: Center(
                     child: Column(children: [
                       ProfileContainer(
-                        user: selectedUser,
+                        user: selectedSeller,
                         isBlocked:
-                            sellersP.blockedSellers.contains(selectedUser),
+                            sellersP.blockedSellers.contains(selectedSeller),
                       ),
                       Expanded(
                         flex: 5,
@@ -108,7 +108,7 @@ class SellersPage extends StatelessWidget {
                                 users: sellersP.verifiedSellers,
                               ),
                               DivisionSnapCard(
-                                title: 'Blocked Riders',
+                                title: 'Blocked Sellers',
                                 isLoading: sellersP.isLoading,
                                 users: sellersP.blockedSellers,
                               ),
@@ -120,8 +120,8 @@ class SellersPage extends StatelessWidget {
                           child: ProfileContainer(
                             user: sellersP
                                 .verifiedSellers[profileP.selectedProfile],
-                            isBlocked:
-                                sellersP.blockedSellers.contains(selectedUser),
+                            isBlocked: sellersP.blockedSellers
+                                .contains(selectedSeller),
                           ),
                         ),
                         const Expanded(child: SizedBox()),
@@ -138,12 +138,12 @@ class SellersPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             DivisionSnapCard(
-                              title: 'Verified Riders',
+                              title: 'Verified Sellers',
                               isLoading: sellersP.isLoading,
                               users: sellersP.verifiedSellers,
                             ),
                             DivisionSnapCard(
-                              title: 'Blocked Riders',
+                              title: 'Blocked Sellers',
                               isLoading: sellersP.isLoading,
                               users: sellersP.blockedSellers,
                             ),
@@ -156,7 +156,7 @@ class SellersPage extends StatelessWidget {
                           user: sellersP
                               .verifiedSellers[profileP.selectedProfile],
                           isBlocked:
-                              sellersP.blockedSellers.contains(selectedUser),
+                              sellersP.blockedSellers.contains(selectedSeller),
                         ),
                       ),
                       const Expanded(child: SizedBox()),

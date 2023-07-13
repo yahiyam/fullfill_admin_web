@@ -12,32 +12,33 @@ class RidersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<SelectedProfileButton>(
       create: (context) => SelectedProfileButton(),
       builder: (context, child) {
         return Scaffold(
           body: Consumer2<RiderProvider, SelectedProfileButton>(
             builder: (context, ridersP, profileP, _) {
               final selectedProfile = profileP.selectedProfile;
-              final verifiedUsers = ridersP.verifiedRiders;
-              final blockedUsers = ridersP.blockedRiders;
+              final verifiedRiders = ridersP.verifiedRiders;
+              final blockedRiders = ridersP.blockedRiders;
 
-              List<dynamic> users;
-              if (verifiedUsers.isNotEmpty) {
-                users = verifiedUsers;
+              List<dynamic> riders;
+              if (verifiedRiders.isNotEmpty) {
+                riders = verifiedRiders;
               } else {
-                users = blockedUsers;
+                riders = blockedRiders;
               }
 
-              if (selectedProfile >= 0 && selectedProfile < users.length) {
-                final selectedUser = users[selectedProfile];
+              if (selectedProfile >= 0 && selectedProfile < riders.length) {
+                final selectedRider = riders[selectedProfile];
 
                 return ResponsiveLayout(
                   phone: Column(
                     children: [
                       ProfileContainer(
-                        user: selectedUser,
-                        isBlocked: ridersP.blockedRiders.contains(selectedUser),
+                        user: selectedRider,
+                        isBlocked:
+                            ridersP.blockedRiders.contains(selectedRider),
                       ),
                       const SizedBox(height: KSizes.padding),
                       Padding(
@@ -61,8 +62,9 @@ class RidersPage extends StatelessWidget {
                   tablet: Center(
                     child: Column(children: [
                       ProfileContainer(
-                        user: selectedUser,
-                        isBlocked: ridersP.blockedRiders.contains(selectedUser),
+                        user: selectedRider,
+                        isBlocked:
+                            ridersP.blockedRiders.contains(selectedRider),
                       ),
                       Expanded(
                         flex: 5,
@@ -119,7 +121,7 @@ class RidersPage extends StatelessWidget {
                             user: ridersP
                                 .verifiedRiders[profileP.selectedProfile],
                             isBlocked:
-                                ridersP.blockedRiders.contains(selectedUser),
+                                ridersP.blockedRiders.contains(selectedRider),
                           ),
                         ),
                         const Expanded(child: SizedBox()),
@@ -151,9 +153,9 @@ class RidersPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(50),
                         child: ProfileContainer(
-                          user: selectedUser,
+                          user: selectedRider,
                           isBlocked:
-                              ridersP.blockedRiders.contains(selectedUser),
+                              ridersP.blockedRiders.contains(selectedRider),
                         ),
                       ),
                       const Expanded(child: SizedBox()),
