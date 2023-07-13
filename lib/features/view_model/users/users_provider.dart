@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/user_service.dart';
 
 class UserProvider extends ChangeNotifier {
   List<User> _verifiedUsers = [];
@@ -34,7 +35,7 @@ class UserProvider extends ChangeNotifier {
       _blockedUsers = blockedSnapshot.docs.map((doc) {
         return User.fromJson(doc.data() as Map<String, dynamic>);
       }).toList();
-      
+
       _usersCount = _verifiedUsers.length + _blockedUsers.length;
 
       _isLoading = false;
@@ -43,6 +44,44 @@ class UserProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       callback(error.toString());
+    }
+  }
+
+  Future<void> unblockUser(String userId) async {
+    try {
+      await UserService.unblockAccount(userId, (error) {
+        throw error ?? 'Error unblocking user';
+      });
+
+      final index = _blockedUsers.indexWhere((user) => user.userID == userId);
+      if (index != -1) {
+        final user = _blockedUsers.removeAt(index);
+        _verifiedUsers.add(user);
+        _usersCount++;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> blockUser(String userId) async {
+    try {
+      await UserService.blockAccount(userId, (error) {
+        throw error ?? 'Error blocking user';
+      });
+
+      final index = _verifiedUsers.indexWhere((user) => user.userID == userId);
+      if (index != -1) {
+        final user = _verifiedUsers.removeAt(index);
+        _blockedUsers.add(user);
+        _usersCount--;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
     }
   }
 }

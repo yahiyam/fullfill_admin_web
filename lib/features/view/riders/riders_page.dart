@@ -18,62 +18,115 @@ class RidersPage extends StatelessWidget {
         return Scaffold(
           body: Consumer2<RiderProvider, SelectedProfileButton>(
             builder: (context, ridersP, profileP, _) {
-              return ResponsiveLayout(
-                phone: Column(
-                  children: [
-                    ProfileContainer(
-                        user: ridersP.verifiedRiders[profileP.selectedProfile]),
-                    const SizedBox(height: KSizes.padding),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: DivisionSnapCard(
-                        title: 'Verified Riders',
-                        isLoading: ridersP.isLoading,
-                        users: ridersP.verifiedRiders,
+              final selectedProfile = profileP.selectedProfile;
+              final verifiedUsers = ridersP.verifiedRiders;
+              final blockedUsers = ridersP.blockedRiders;
+
+              List<dynamic> users;
+              if (verifiedUsers.isNotEmpty) {
+                users = verifiedUsers;
+              } else {
+                users = blockedUsers;
+              }
+
+              if (selectedProfile >= 0 && selectedProfile < users.length) {
+                final selectedUser = users[selectedProfile];
+
+                return ResponsiveLayout(
+                  phone: Column(
+                    children: [
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked: ridersP.blockedRiders.contains(selectedUser),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: DivisionSnapCard(
-                        title: 'Blocked Riders',
-                        isLoading: ridersP.isLoading,
-                        users: ridersP.blockedRiders,
+                      const SizedBox(height: KSizes.padding),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: DivisionSnapCard(
+                          title: 'Verified Riders',
+                          isLoading: ridersP.isLoading,
+                          users: ridersP.verifiedRiders,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                tablet: Center(
-                  child: Column(children: [
-                    ProfileContainer(
-                        user: ridersP.verifiedRiders[profileP.selectedProfile]),
-                    Expanded(
-                      flex: 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: DivisionSnapCard(
-                              title: 'Verified Riders',
-                              isLoading: ridersP.isLoading,
-                              users: ridersP.verifiedRiders,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: DivisionSnapCard(
+                          title: 'Blocked Riders',
+                          isLoading: ridersP.isLoading,
+                          users: ridersP.blockedRiders,
+                        ),
+                      ),
+                    ],
+                  ),
+                  tablet: Center(
+                    child: Column(children: [
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked: ridersP.blockedRiders.contains(selectedUser),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: DivisionSnapCard(
+                                title: 'Verified Riders',
+                                isLoading: ridersP.isLoading,
+                                users: ridersP.verifiedRiders,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: DivisionSnapCard(
-                              title: 'Blocked Riders',
-                              isLoading: ridersP.isLoading,
-                              users: ridersP.blockedRiders,
+                            Expanded(
+                              child: DivisionSnapCard(
+                                title: 'Blocked Riders',
+                                isLoading: ridersP.isLoading,
+                                users: ridersP.blockedRiders,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      const Expanded(child: SizedBox()),
+                    ]),
+                  ),
+                  largeTablet: Center(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Expanded(child: SizedBox()),
+                        Flexible(
+                          flex: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DivisionSnapCard(
+                                title: 'Verified Riders',
+                                isLoading: ridersP.isLoading,
+                                users: ridersP.verifiedRiders,
+                              ),
+                              DivisionSnapCard(
+                                title: 'Blocked Riders',
+                                isLoading: ridersP.isLoading,
+                                users: ridersP.blockedRiders,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(50),
+                          child: ProfileContainer(
+                            user: ridersP
+                                .verifiedRiders[profileP.selectedProfile],
+                            isBlocked:
+                                ridersP.blockedRiders.contains(selectedUser),
+                          ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                      ],
                     ),
-                    const Expanded(child: SizedBox()),
-                  ]),
-                ),
-                largeTablet: Center(
-                  child: Row(
+                  ),
+                  computer: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Expanded(child: SizedBox()),
@@ -98,45 +151,23 @@ class RidersPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(50),
                         child: ProfileContainer(
-                            user: ridersP
-                                .verifiedRiders[profileP.selectedProfile]),
+                          user: selectedUser,
+                          isBlocked:
+                              ridersP.blockedRiders.contains(selectedUser),
+                        ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],
                   ),
-                ),
-                computer: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Expanded(child: SizedBox()),
-                    Flexible(
-                      flex: 4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          DivisionSnapCard(
-                            title: 'Verified Riders',
-                            isLoading: ridersP.isLoading,
-                            users: ridersP.verifiedRiders,
-                          ),
-                          DivisionSnapCard(
-                            title: 'Blocked Riders',
-                            isLoading: ridersP.isLoading,
-                            users: ridersP.blockedRiders,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: ProfileContainer(
-                          user:
-                              ridersP.verifiedRiders[profileP.selectedProfile]),
-                    ),
-                    const Expanded(child: SizedBox()),
-                  ],
-                ),
-              );
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'Invalid profile selection',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                );
+              }
             },
           ),
         );

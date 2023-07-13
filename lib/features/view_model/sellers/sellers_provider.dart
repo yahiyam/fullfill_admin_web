@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/seller_service.dart';
 
 class SellerProvider extends ChangeNotifier {
   List<Seller> _verifiedSellers = [];
@@ -43,6 +44,46 @@ class SellerProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       callback(error.toString());
+    }
+  }
+
+  Future<void> unblockSeller(String sellerId) async {
+    try {
+      await SellerService.unblockAccount(sellerId, (error) {
+        throw error ?? 'Error unblocking seller';
+      });
+
+      final index =
+          _blockedSellers.indexWhere((seller) => seller.sellerID == sellerId);
+      if (index != -1) {
+        final seller = _blockedSellers.removeAt(index);
+        _verifiedSellers.add(seller);
+        _sellersCount++;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> blockSeller(String userId) async {
+    try {
+      await SellerService.blockAccount(userId, (error) {
+        throw error ?? 'Error blocking seller';
+      });
+
+      final index =
+          _verifiedSellers.indexWhere((seller) => seller.sellerID == userId);
+      if (index != -1) {
+        final seller = _verifiedSellers.removeAt(index);
+        _blockedSellers.add(seller);
+        _sellersCount--;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
     }
   }
 }

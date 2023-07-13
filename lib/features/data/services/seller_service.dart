@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SellerService {
-  static Future<void> approveAccount(
+  static Future<void> unblockAccount(
     String sellerId,
     Function(String? error) callback,
   ) async {

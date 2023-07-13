@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
+import 'package:fullfill_admin_web_portal/features/data/services/rider_service.dart';
 
 class RiderProvider extends ChangeNotifier {
   List<Rider> _verifiedRiders = [];
@@ -43,6 +44,46 @@ class RiderProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       callback(error.toString());
+    }
+  }
+
+  Future<void> unblockRider(String riderId) async {
+    try {
+      await RiderService.unblockAccount(riderId, (error) {
+        throw error ?? 'Error unblocking rider';
+      });
+
+      final index =
+          _blockedRiders.indexWhere((rider) => rider.riderID == riderId);
+      if (index != -1) {
+        final rider = _blockedRiders.removeAt(index);
+        _verifiedRiders.add(rider);
+        _ridersCount++;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> blockRider(String userId) async {
+    try {
+      await RiderService.blockAccount(userId, (error) {
+        throw error ?? 'Error blocking rider';
+      });
+
+      final index =
+          _verifiedRiders.indexWhere((rider) => rider.riderID == userId);
+      if (index != -1) {
+        final rider = _verifiedRiders.removeAt(index);
+        _blockedRiders.add(rider);
+        _ridersCount--;
+      }
+
+      notifyListeners();
+    } catch (error) {
+      rethrow;
     }
   }
 }

@@ -35,7 +35,10 @@ class UsersPage extends StatelessWidget {
                 return ResponsiveLayout(
                   phone: Column(
                     children: [
-                      ProfileContainer(user: selectedUser),
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked: usersP.blockedUsers.contains(selectedUser),
+                      ),
                       const SizedBox(height: KSizes.padding),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -57,7 +60,10 @@ class UsersPage extends StatelessWidget {
                   ),
                   tablet: Center(
                     child: Column(children: [
-                      ProfileContainer(user: selectedUser),
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked: usersP.blockedUsers.contains(selectedUser),
+                      ),
                       Expanded(
                         flex: 5,
                         child: Row(
@@ -109,7 +115,11 @@ class UsersPage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(50),
-                          child: ProfileContainer(user: selectedUser),
+                          child: ProfileContainer(
+                            user: selectedUser,
+                            isBlocked:
+                                usersP.blockedUsers.contains(selectedUser),
+                          ),
                         ),
                         const Expanded(child: SizedBox()),
                       ],
@@ -139,7 +149,10 @@ class UsersPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(50),
-                        child: ProfileContainer(user: selectedUser),
+                        child: ProfileContainer(
+                          user: selectedUser,
+                          isBlocked: usersP.blockedUsers.contains(selectedUser),
+                        ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],

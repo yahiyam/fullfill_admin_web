@@ -18,64 +18,117 @@ class SellersPage extends StatelessWidget {
         return Scaffold(
           body: Consumer2<SellerProvider, SelectedProfileButton>(
             builder: (context, sellersP, profileP, _) {
-              return ResponsiveLayout(
-                phone: Column(
-                  children: [
-                    ProfileContainer(
-                        user:
-                            sellersP.verifiedSellers[profileP.selectedProfile]),
-                    const SizedBox(height: KSizes.padding),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: DivisionSnapCard(
-                        title: 'Verified Sellers',
-                        isLoading: sellersP.isLoading,
-                        users: sellersP.verifiedSellers,
+              final selectedProfile = profileP.selectedProfile;
+              final verifiedUsers = sellersP.verifiedSellers;
+              final blockedUsers = sellersP.blockedSellers;
+
+              List<dynamic> users;
+              if (verifiedUsers.isNotEmpty) {
+                users = verifiedUsers;
+              } else {
+                users = blockedUsers;
+              }
+
+              if (selectedProfile >= 0 && selectedProfile < users.length) {
+                final selectedUser = users[selectedProfile];
+
+                return ResponsiveLayout(
+                  phone: Column(
+                    children: [
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked:
+                            sellersP.blockedSellers.contains(selectedUser),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: DivisionSnapCard(
-                        title: 'Blocked Sellers',
-                        isLoading: sellersP.isLoading,
-                        users: sellersP.blockedSellers,
+                      const SizedBox(height: KSizes.padding),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: DivisionSnapCard(
+                          title: 'Verified Sellers',
+                          isLoading: sellersP.isLoading,
+                          users: sellersP.verifiedSellers,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                tablet: Center(
-                  child: Column(children: [
-                    ProfileContainer(
-                        user:
-                            sellersP.verifiedSellers[profileP.selectedProfile]),
-                    Expanded(
-                      flex: 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: DivisionSnapCard(
-                              title: 'Verified Sellers',
-                              isLoading: sellersP.isLoading,
-                              users: sellersP.verifiedSellers,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: DivisionSnapCard(
+                          title: 'Blocked Sellers',
+                          isLoading: sellersP.isLoading,
+                          users: sellersP.blockedSellers,
+                        ),
+                      ),
+                    ],
+                  ),
+                  tablet: Center(
+                    child: Column(children: [
+                      ProfileContainer(
+                        user: selectedUser,
+                        isBlocked:
+                            sellersP.blockedSellers.contains(selectedUser),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: DivisionSnapCard(
+                                title: 'Verified Sellers',
+                                isLoading: sellersP.isLoading,
+                                users: sellersP.verifiedSellers,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: DivisionSnapCard(
-                              title: 'Blocked Sellers',
-                              isLoading: sellersP.isLoading,
-                              users: sellersP.blockedSellers,
+                            Expanded(
+                              child: DivisionSnapCard(
+                                title: 'Blocked Sellers',
+                                isLoading: sellersP.isLoading,
+                                users: sellersP.blockedSellers,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      const Expanded(child: SizedBox()),
+                    ]),
+                  ),
+                  largeTablet: Center(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Expanded(child: SizedBox()),
+                        Flexible(
+                          flex: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DivisionSnapCard(
+                                title: 'Verified Sellers',
+                                isLoading: sellersP.isLoading,
+                                users: sellersP.verifiedSellers,
+                              ),
+                              DivisionSnapCard(
+                                title: 'Blocked Riders',
+                                isLoading: sellersP.isLoading,
+                                users: sellersP.blockedSellers,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(50),
+                          child: ProfileContainer(
+                            user: sellersP
+                                .verifiedSellers[profileP.selectedProfile],
+                            isBlocked:
+                                sellersP.blockedSellers.contains(selectedUser),
+                          ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                      ],
                     ),
-                    const Expanded(child: SizedBox()),
-                  ]),
-                ),
-                largeTablet: Center(
-                  child: Row(
+                  ),
+                  computer: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Expanded(child: SizedBox()),
@@ -85,7 +138,7 @@ class SellersPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             DivisionSnapCard(
-                              title: 'Verified Sellers',
+                              title: 'Verified Riders',
                               isLoading: sellersP.isLoading,
                               users: sellersP.verifiedSellers,
                             ),
@@ -100,45 +153,24 @@ class SellersPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(50),
                         child: ProfileContainer(
-                            user: sellersP
-                                .verifiedSellers[profileP.selectedProfile]),
+                          user: sellersP
+                              .verifiedSellers[profileP.selectedProfile],
+                          isBlocked:
+                              sellersP.blockedSellers.contains(selectedUser),
+                        ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],
                   ),
-                ),
-                computer: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Expanded(child: SizedBox()),
-                    Flexible(
-                      flex: 4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          DivisionSnapCard(
-                            title: 'Verified Riders',
-                            isLoading: sellersP.isLoading,
-                            users: sellersP.verifiedSellers,
-                          ),
-                          DivisionSnapCard(
-                            title: 'Blocked Riders',
-                            isLoading: sellersP.isLoading,
-                            users: sellersP.blockedSellers,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: ProfileContainer(
-                          user: sellersP
-                              .verifiedSellers[profileP.selectedProfile]),
-                    ),
-                    const Expanded(child: SizedBox()),
-                  ],
-                ),
-              );
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'Invalid profile selection',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                );
+              }
             },
           ),
         );

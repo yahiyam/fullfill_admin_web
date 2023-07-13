@@ -1,24 +1,35 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
-import 'package:fullfill_admin_web_portal/features/data/services/rider_service.dart';
-import 'package:fullfill_admin_web_portal/features/data/services/seller_service.dart';
-import 'package:fullfill_admin_web_portal/features/data/services/user_service.dart';
+import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
+import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
+import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/riders/riders_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
+import 'package:fullfill_admin_web_portal/utils/functions/alert_message.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
+import 'package:provider/provider.dart';
 
-class ProfileContainer extends StatelessWidget {
+class ProfileContainer extends StatefulWidget {
   final dynamic user;
 
+  final bool isBlocked;
   const ProfileContainer({
     super.key,
     required this.user,
+    required this.isBlocked,
   });
 
   @override
+  State<ProfileContainer> createState() => _ProfileContainerState();
+}
+
+class _ProfileContainerState extends State<ProfileContainer> {
+  bool isLoading = false;
+  @override
   Widget build(BuildContext context) {
-    final userDetails = getUserDetails(user);
+    final userDetails = getUserDetails(widget.user);
 
     if (userDetails == null) {
       return Container();
@@ -115,17 +126,77 @@ class ProfileContainer extends StatelessWidget {
                 ],
               ),
               ElevatedButton.icon(
-                onPressed: () {
-                  UserService.blockAccount(uId, (error) => log(error.toString()));
-                  SellerService.blockAccount(uId, (error) => error.toString());
-                  RiderService.blockAccount(uId, (error) => error.toString());
-                },
-                icon: const Icon(
-                  Icons.block,
-                  color: KColors.accentColor,
-                ),
+                onPressed: isLoading
+                    ? null
+                    : () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        try {
+                          if (widget.user is Rider) {
+                            final riderProvider = Provider.of<RiderProvider>(
+                              context,
+                              listen: false,
+                            );
+
+                            if (widget.isBlocked) {
+                              // Unblock the user
+                              await riderProvider.unblockRider(uId);
+                            } else {
+                              // Block the user
+                              await riderProvider.blockRider(uId);
+                            }
+                          } else if (widget.user is Seller) {
+                            final sellerProvider = Provider.of<SellerProvider>(
+                              context,
+                              listen: false,
+                            );
+
+                            if (widget.isBlocked) {
+                              // Unblock the user
+                              await sellerProvider.unblockSeller(uId);
+                            } else {
+                              // Block the user
+                              await sellerProvider.blockSeller(uId);
+                            }
+                          } else if (widget.user is User) {
+                            final userProvider = Provider.of<UserProvider>(
+                              context,
+                              listen: false,
+                            );
+
+                            if (widget.isBlocked) {
+                              // Unblock the user
+                              await userProvider.unblockUser(uId);
+                            } else {
+                              // Block the user
+                              await userProvider.blockUser(uId);
+                            }
+                          }
+                        } catch (error) {
+                          showAlertMessege(
+                            context,
+                            title: 'Error blocking/unblocking user',
+                            message: error.toString(),
+                          );
+                        } finally {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      },
+                icon: widget.isBlocked
+                    ? const Icon(
+                        Icons.check,
+                        color: KColors.accentColor,
+                      )
+                    : const Icon(
+                        Icons.block,
+                        color: KColors.accentColor,
+                      ),
                 label: Text(
-                  "Block $name",
+                  widget.isBlocked ? "Unblock $name" : "Block $name",
                   overflow: TextOverflow.fade,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -133,7 +204,7 @@ class ProfileContainer extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
