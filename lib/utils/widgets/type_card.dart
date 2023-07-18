@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
+import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
 import 'package:provider/provider.dart';
@@ -10,16 +11,20 @@ class DivisionSnapCard extends StatelessWidget {
     required this.title,
     required this.users,
     required this.isLoading,
+    this.isBlocked,
   });
 
   final String title;
   final List<dynamic> users;
   final bool isLoading;
+  final bool? isBlocked;
 
   @override
   Widget build(BuildContext context) {
     final bool isHome =
         Provider.of<SelectedDrawerButton>(context).selectedDrawer == 0;
+    // final selectedProfile = Provider.of<SelectedProfile>(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -51,6 +56,7 @@ class DivisionSnapCard extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 child: LinearProgressIndicator(
                   color: KColors.complementarySecondary,
+                  backgroundColor: KColors.lighterShade2Secondary,
                 ),
               )),
             if (!isLoading)
@@ -66,6 +72,7 @@ class DivisionSnapCard extends StatelessWidget {
                     return Container();
                   }
                   final userName = userDetails['name'];
+
                   return ListTile(
                     title: Text(
                       userName,
@@ -77,18 +84,28 @@ class DivisionSnapCard extends StatelessWidget {
                     ),
                     onTap: () {
                       if (!isHome) {
-                        final profileIndex = Provider.of<SelectedProfileButton>(
+                        final profileIndex = Provider.of<SelectedProfile>(
                             context,
                             listen: false);
-                        profileIndex.selectProfile(index);
+
+                        isBlocked!
+                            ? profileIndex.selectBlockedProfile(index)
+                            : profileIndex.selectVerifiedProfile(index);
                       }
                     },
                     leading: CircleAvatar(
-                      backgroundColor: KColors.avatarBgColor,
+                      backgroundColor:
+                          //  isHome
+                          // ? KColors.selectedAvatarBgColor
+                          // : selectedProfile.getSelectedProfile(isBlocked!) ==
+                          //         index
+                          //     ? KColors.selectedAvatarBgColor
+                          //     :
+                          KColors.nonSelectedAvatarBgColor,
                       child: Text(
-                        userName[0],
+                        isHome ? userName[0] : '${index + 1}',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: KColors.neutralColor,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -100,11 +117,22 @@ class DivisionSnapCard extends StatelessWidget {
             if (users.isEmpty && !isLoading)
               Container(
                 margin: const EdgeInsets.all(10),
-                child: const Text(
-                  "It's empty",
-                  style: TextStyle(
-                    color: KColors.neutralColor,
-                  ),
+                child: const Column(
+                  children: [
+                    Text(
+                      KTexts.sadFace,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: KColors.neutralColor,
+                      ),
+                    ),
+                    Text(
+                      "It's empty",
+                      style: TextStyle(
+                        color: KColors.neutralColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],

@@ -4,6 +4,7 @@ import 'package:fullfill_admin_web_portal/constants/sizes.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/riders/riders_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
@@ -12,12 +13,14 @@ import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
 import 'package:provider/provider.dart';
 
 class ProfileContainer extends StatefulWidget {
-  final dynamic user;
+  final List<dynamic> users;
   final bool isBlocked;
+  final int index;
 
   const ProfileContainer({
     super.key,
-    required this.user,
+    required this.users,
+    required this.index,
     required this.isBlocked,
   });
 
@@ -27,9 +30,15 @@ class ProfileContainer extends StatefulWidget {
 
 class _ProfileContainerState extends State<ProfileContainer> {
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    final userDetails = getUserDetails(widget.user);
+    if (widget.index >= widget.users.length) {
+      return const Center(child: CircleAvatar());
+    }
+
+    final user = widget.users[widget.index];
+    final userDetails = getUserDetails(user);
 
     if (userDetails == null) {
       return Container();
@@ -74,17 +83,33 @@ class _ProfileContainerState extends State<ProfileContainer> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CircleAvatar(
-                radius: KSizes.screenHeight(8),
-                backgroundColor: KColors.avatarBgColor,
-                child: Text(
-                  name[0],
-                  style: TextStyle(
-                    color: KColors.neutralColor,
-                    fontSize: KSizes.screenHeight(8),
-                    fontWeight: FontWeight.bold,
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: KSizes.screenHeight(8),
+                    backgroundColor: KColors.selectedAvatarBgColor,
+                    child: Text(
+                      name[0],
+                      style: TextStyle(
+                        color: KColors.neutralColor,
+                        fontSize: KSizes.screenHeight(8),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  CircleAvatar(
+                    child: Center(
+                      child: Text(
+                        (widget.index + 1).toString(),
+                        style: const TextStyle(
+                          color: KColors.selectedAvatarBgColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
               Column(
                 children: [
@@ -102,6 +127,13 @@ class _ProfileContainerState extends State<ProfileContainer> {
                     style: const TextStyle(
                       color: KColors.neutralColor,
                       fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    "ID: $uId",
+                    style: const TextStyle(
+                      color: KColors.lighterShade2Primary,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -134,7 +166,15 @@ class _ProfileContainerState extends State<ProfileContainer> {
                         });
 
                         try {
-                          if (widget.user is Rider) {
+                          final profile = Provider.of<SelectedProfile>(
+                            context,
+                            listen: false,
+                          );
+                          if (widget.index + 1 == widget.users.length) {
+                            profile.resetIndex();
+                          }
+
+                          if (user is Rider) {
                             final riderProvider = Provider.of<RiderProvider>(
                               context,
                               listen: false,
@@ -147,7 +187,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                               // Block the user
                               await riderProvider.blockRider(uId);
                             }
-                          } else if (widget.user is Seller) {
+                          } else if (user is Seller) {
                             final sellerProvider = Provider.of<SellerProvider>(
                               context,
                               listen: false,
@@ -160,7 +200,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                               // Block the user
                               await sellerProvider.blockSeller(uId);
                             }
-                          } else if (widget.user is User) {
+                          } else if (user is User) {
                             final userProvider = Provider.of<UserProvider>(
                               context,
                               listen: false,
@@ -196,7 +236,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
                         color: KColors.accentColor,
                       ),
                 label: Text(
-                  widget.isBlocked ? "Unblock $name" : "Block $name",
+                  widget.isBlocked ? "Unblock" : "Block",
                   overflow: TextOverflow.fade,
                   textAlign: TextAlign.center,
                   style: const TextStyle(

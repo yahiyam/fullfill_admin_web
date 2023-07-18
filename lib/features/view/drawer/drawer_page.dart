@@ -17,7 +17,6 @@ class DrawerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DrawerButtonsInfo> drawerButtons = [
       DrawerButtonsInfo(title: "Home", icon: Icons.home),
-      DrawerButtonsInfo(title: "Contacts", icon: Icons.contact_phone_rounded),
       DrawerButtonsInfo(title: "Riders", icon: Icons.delivery_dining),
       DrawerButtonsInfo(title: "Sellers", icon: Icons.storefront),
       DrawerButtonsInfo(title: "Users", icon: Icons.supervised_user_circle),

@@ -10,12 +10,33 @@ class SelectedDrawerButton extends ChangeNotifier {
   }
 }
 
-class SelectedProfileButton extends ChangeNotifier {
-  int _selectedProfile = 0;
-  int get selectedProfile => _selectedProfile;
+class SelectedProfile extends ChangeNotifier {
+  int _selectedVerifiedProfile = 0;
+  int get selectedVerifiedProfile => _selectedVerifiedProfile;
 
-  void selectProfile(int index) {
-    _selectedProfile = index;
+  void selectVerifiedProfile(int index) {
+    _selectedVerifiedProfile = index;
+    notifyListeners();
+  }
+
+  void resetIndex() {
+    _selectedBlockedProfile = 0;
+    _selectedVerifiedProfile = 0;
+  }
+
+  int getSelectedProfile(bool isBlocked) {
+    if (isBlocked) {
+      return _selectedBlockedProfile;
+    } else {
+      return _selectedVerifiedProfile;
+    }
+  }
+
+  int _selectedBlockedProfile = 0;
+  int get selectedBlockedProfile => _selectedBlockedProfile;
+
+  void selectBlockedProfile(int index) {
+    _selectedBlockedProfile = index;
     notifyListeners();
   }
 }

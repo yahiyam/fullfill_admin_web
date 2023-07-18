@@ -25,7 +25,8 @@ class KColors {
   static const drawerBgColor = analogous1Secondary;
   static const appBarBgColor = analogous1Secondary;
   static const scaffoldBgColor = analogous1Secondary;
-  static const avatarBgColor = analogous2Primary;
+  static const selectedAvatarBgColor = analogous2Primary;
+  static const nonSelectedAvatarBgColor = analogous1Secondary;
 
   // static const pageBackGround = Color(0xFF212332);
   // static const purpleLight = Color(0XFF1e224c);

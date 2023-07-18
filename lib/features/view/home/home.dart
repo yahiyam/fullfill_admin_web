@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/features/view/contacts/contacts_page.dart';
 import 'package:fullfill_admin_web_portal/features/view/drawer/drawer_page.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/custom_app_bar.dart';
 import 'package:fullfill_admin_web_portal/features/view/riders/riders_info.dart';
@@ -52,12 +51,10 @@ class HomePage extends StatelessWidget {
                   Flexible(child: RidersInfo()),
                 ])
               : drawer.selectedDrawer == 1
-                  ? const ContactsPage()
+                  ? const RidersPage()
                   : drawer.selectedDrawer == 2
-                      ? const RidersPage()
-                      : drawer.selectedDrawer == 3
-                          ? const SellersPage()
-                          : const UsersPage(),
+                      ? const SellersPage()
+                      : const UsersPage(),
           tablet: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,12 +63,10 @@ class HomePage extends StatelessWidget {
                       Expanded(child: SellersInfo()),
                     ])
               : drawer.selectedDrawer == 1
-                  ? const ContactsPage()
+                  ? const RidersPage()
                   : drawer.selectedDrawer == 2
-                      ? const RidersPage()
-                      : drawer.selectedDrawer == 3
-                          ? const SellersPage()
-                          : const UsersPage(),
+                      ? const SellersPage()
+                      : const UsersPage(),
           largeTablet: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,12 +76,10 @@ class HomePage extends StatelessWidget {
                       Expanded(child: SellersInfo()),
                     ])
               : drawer.selectedDrawer == 1
-                  ? const ContactsPage()
+                  ? const RidersPage()
                   : drawer.selectedDrawer == 2
-                      ? const RidersPage()
-                      : drawer.selectedDrawer == 3
-                          ? const SellersPage()
-                          : const UsersPage(),
+                      ? const SellersPage()
+                      : const UsersPage(),
           computer: drawer.selectedDrawer == 0
               ? const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,27 +92,20 @@ class HomePage extends StatelessWidget {
               : drawer.selectedDrawer == 1
                   ? const Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [DrawerPage(), Expanded(child: ContactsPage())])
+                      children: [DrawerPage(), Expanded(child: RidersPage())])
                   : drawer.selectedDrawer == 2
                       ? const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                               DrawerPage(),
-                              Expanded(child: RidersPage())
+                              Expanded(child: SellersPage())
                             ])
-                      : drawer.selectedDrawer == 3
-                          ? const Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                  DrawerPage(),
-                                  Expanded(child: SellersPage())
-                                ])
-                          : const Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                  DrawerPage(),
-                                  Expanded(child: UsersPage())
-                                ]),
+                      : const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                              DrawerPage(),
+                              Expanded(child: UsersPage())
+                            ]),
         );
       }),
     );
