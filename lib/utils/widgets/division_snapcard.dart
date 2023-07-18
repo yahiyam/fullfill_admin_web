@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
-import 'package:provider/provider.dart';
 
 class DivisionSnapCard extends StatelessWidget {
   const DivisionSnapCard({
@@ -11,20 +9,14 @@ class DivisionSnapCard extends StatelessWidget {
     required this.title,
     required this.users,
     required this.isLoading,
-    this.isBlocked,
   });
 
   final String title;
   final List<dynamic> users;
   final bool isLoading;
-  final bool? isBlocked;
 
   @override
   Widget build(BuildContext context) {
-    final bool isHome =
-        Provider.of<SelectedDrawerButton>(context).selectedDrawer == 0;
-    // final selectedProfile = Provider.of<SelectedProfile>(context);
-
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -82,28 +74,10 @@ class DivisionSnapCard extends StatelessWidget {
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    onTap: () {
-                      if (!isHome) {
-                        final profileIndex = Provider.of<SelectedProfile>(
-                            context,
-                            listen: false);
-
-                        isBlocked!
-                            ? profileIndex.selectBlockedProfile(index)
-                            : profileIndex.selectVerifiedProfile(index);
-                      }
-                    },
                     leading: CircleAvatar(
-                      backgroundColor:
-                          //  isHome
-                          // ? KColors.selectedAvatarBgColor
-                          // : selectedProfile.getSelectedProfile(isBlocked!) ==
-                          //         index
-                          //     ? KColors.selectedAvatarBgColor
-                          //     :
-                          KColors.nonSelectedAvatarBgColor,
+                      backgroundColor: KColors.nonSelectedAvatarBgColor,
                       child: Text(
-                        isHome ? userName[0] : '${index + 1}',
+                        userName[0],
                         style: const TextStyle(
                           color: KColors.neutralColor,
                           fontSize: 20,

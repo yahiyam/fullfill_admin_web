@@ -5,7 +5,7 @@ import 'package:fullfill_admin_web_portal/features/view_model/users/users_provid
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:fullfill_admin_web_portal/utils/widgets/empty_page_messege.dart';
 import 'package:fullfill_admin_web_portal/utils/widgets/profile_container.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/type_card.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/detail_page_snapcard.dart.dart';
 import 'package:provider/provider.dart';
 
 class VerifiedUsers extends StatelessWidget {
@@ -36,7 +36,7 @@ class VerifiedUsers extends StatelessWidget {
               const SizedBox(height: KSizes.padding),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: DivisionSnapCard(
+                child: DetailPageSnapCard(
                   isBlocked: isBlocked,
                   title: 'Verified Users',
                   isLoading: usersP.isLoading,
@@ -59,7 +59,7 @@ class VerifiedUsers extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Expanded(
-                      child: DivisionSnapCard(
+                      child: DetailPageSnapCard(
                         isBlocked: isBlocked,
                         title: 'Verified Users',
                         isLoading: usersP.isLoading,
@@ -82,7 +82,7 @@ class VerifiedUsers extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      DivisionSnapCard(
+                      DetailPageSnapCard(
                         isBlocked: isBlocked,
                         title: 'Verified Users',
                         isLoading: usersP.isLoading,
@@ -112,7 +112,7 @@ class VerifiedUsers extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    DivisionSnapCard(
+                    DetailPageSnapCard(
                       isBlocked: isBlocked,
                       title: 'Verified Users',
                       isLoading: usersP.isLoading,

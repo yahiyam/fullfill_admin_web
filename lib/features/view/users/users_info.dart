@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
 import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/type_card.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/division_snapcard.dart';
 import 'package:provider/provider.dart';
 
 class UsersInfo extends StatelessWidget {
