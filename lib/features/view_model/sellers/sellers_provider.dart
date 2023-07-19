@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
 import 'package:fullfill_admin_web_portal/features/data/services/seller_service.dart';
 
@@ -49,6 +49,9 @@ class SellerProvider extends ChangeNotifier {
 
   Future<void> unblockSeller(String sellerId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await SellerService.unblockAccount(sellerId, (error) {
         throw error ?? 'Error unblocking seller';
       });
@@ -61,14 +64,20 @@ class SellerProvider extends ChangeNotifier {
         _sellersCount++;
       }
 
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }
 
   Future<void> blockSeller(String userId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await SellerService.blockAccount(userId, (error) {
         throw error ?? 'Error blocking seller';
       });
@@ -81,8 +90,11 @@ class SellerProvider extends ChangeNotifier {
         _sellersCount--;
       }
 
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }

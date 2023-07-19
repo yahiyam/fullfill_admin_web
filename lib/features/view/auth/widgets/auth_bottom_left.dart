@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
+import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
 
 class AuthBottomLeft extends StatelessWidget {

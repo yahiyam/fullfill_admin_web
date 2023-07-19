@@ -3,7 +3,6 @@ class User {
   String? userName;
   String? userAvatarUrl;
   String? userEmail;
-  String? userStatus;
   String? userDob;
   String? userPhoneNumber;
 
@@ -12,7 +11,6 @@ class User {
     this.userName,
     this.userAvatarUrl,
     this.userEmail,
-    this.userStatus,
     this.userDob,
     this.userPhoneNumber,
   });
@@ -22,7 +20,6 @@ class User {
     userName = json["userName"];
     userAvatarUrl = json["userAvatarUrl"];
     userEmail = json["userEmail"];
-    userStatus = json["status"];
     userDob = json["userDob"] ?? 'Not specified';
     userPhoneNumber = json["userPhoneNumber"] ?? 'Not specified';
   }

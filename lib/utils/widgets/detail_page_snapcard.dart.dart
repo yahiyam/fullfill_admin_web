@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/constants/text_strings.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 import 'package:fullfill_admin_web_portal/utils/functions/divition_user.dart';
-import 'package:provider/provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 
 class DetailPageSnapCard extends StatelessWidget {
   const DetailPageSnapCard({

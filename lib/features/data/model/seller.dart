@@ -3,7 +3,6 @@ class Seller {
   String? sellerName;
   String? sellerAvatarUrl;
   String? sellerEmail;
-  String? sellerStatus;
   String? sellerDob;
   String? sellerPhoneNumber;
 
@@ -12,7 +11,6 @@ class Seller {
     this.sellerName,
     this.sellerAvatarUrl,
     this.sellerEmail,
-    this.sellerStatus,
     this.sellerDob,
     this.sellerPhoneNumber,
   });
@@ -22,7 +20,6 @@ class Seller {
     sellerName = json["sellerName"];
     sellerAvatarUrl = json["sellerAvatarUrl"];
     sellerEmail = json["sellerEmail"];
-    sellerStatus = json["status"];
     sellerDob = json["sellerDob"] ?? 'Not specified';
     sellerPhoneNumber = json["sellerPhoneNumber"] ?? 'Not specified';
   }

@@ -1,6 +1,6 @@
+import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/seller.dart';
-import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 
 Map<String, dynamic>? getUserDetails(dynamic user) {
   String? uId;

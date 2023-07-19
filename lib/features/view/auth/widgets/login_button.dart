@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/features/view/home/home.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
-import 'package:provider/provider.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -19,19 +19,14 @@ class LoginButton extends StatelessWidget {
                       if (loginProvider.errorMessage == null)
                         {
                           Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          ),
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage())),
                         }
                       else
                         {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(loginProvider.errorMessage!),
-                            ),
-                          ),
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(loginProvider.errorMessage!))),
                         }
                     },
                   );
@@ -55,16 +50,23 @@ class LoginButton extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Center(
-              child: Text(
-                "Log In",
-                style: TextStyle(
-                  color: KColors.neutralColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            child: loginProvider.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: KColors.neutralColor,
+                      strokeWidth: 2,
+                    ),
+                  )
+                : const Center(
+                    child: Text(
+                      "Log In",
+                      style: TextStyle(
+                        color: KColors.neutralColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
           ),
         );
       },

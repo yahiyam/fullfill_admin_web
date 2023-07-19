@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/obscure_provider.dart';
-import 'package:provider/provider.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool? obscureText;
@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
             labelText: labelText,
             suffixIcon: Icon(
               icon,
-              color:KColors.primary,
+              color: KColors.primary,
             ),
             contentPadding: const EdgeInsets.only(bottom: 10),
             suffix: obscureText! && showSuffixIcon! && obscure.isTyped

@@ -1,5 +1,3 @@
-/* App Image Strings */
-
 class KImages {
   static const String appLogo = 'assets/images/logo.png';
   static const String cartoonMale = 'assets/images/malePerson.png';

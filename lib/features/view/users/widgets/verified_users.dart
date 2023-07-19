@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/constants/sizes.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
-import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/empty_page_messege.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/profile_container.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/detail_page_snapcard.dart.dart';
 import 'package:provider/provider.dart';
+import 'package:fullfill_admin_web_portal/constants/sizes.dart';
+import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/profile_container.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/empty_page_messege.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/detail_page_snapcard.dart.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/users/users_provider.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
 
 class VerifiedUsers extends StatelessWidget {
   const VerifiedUsers({super.key});

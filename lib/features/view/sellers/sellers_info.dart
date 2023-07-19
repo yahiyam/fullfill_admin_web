@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
-import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
-import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/division_snapcard.dart';
 import 'package:provider/provider.dart';
+import 'package:fullfill_admin_web_portal/responsive/responsive_layout.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/division_snapcard.dart';
+import 'package:fullfill_admin_web_portal/features/view/home/widgets/division_header.dart';
+import 'package:fullfill_admin_web_portal/features/view_model/sellers/sellers_provider.dart';
 
 class SellersInfo extends StatelessWidget {
   const SellersInfo({super.key});

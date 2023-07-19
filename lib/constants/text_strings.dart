@@ -1,4 +1,3 @@
-/* App Text Strings */
 class KTexts {
   static const String appName = 'FULLFILL';
   static const String appTagLine = "Satisfy Your Cravings, Beyond Food!";

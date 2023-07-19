@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:fullfill_admin_web_portal/utils/widgets/detail_page_appbar.dart';
 import 'package:fullfill_admin_web_portal/features/view/riders/widgets/blocked_riders.dart';
 import 'package:fullfill_admin_web_portal/features/view/riders/widgets/verified_riders.dart';
-import 'package:fullfill_admin_web_portal/utils/widgets/detail_page_appbar.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/drawer/select_button_index.dart';
-import 'package:provider/provider.dart';
 
 class RidersPage extends StatelessWidget {
   const RidersPage({super.key});

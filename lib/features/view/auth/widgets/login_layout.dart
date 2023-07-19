@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_admin_web_portal/constants/colors.dart';
+import 'package:provider/provider.dart';
 import 'package:fullfill_admin_web_portal/constants/sizes.dart';
-import 'package:fullfill_admin_web_portal/features/view/auth/widgets/custom_text_field.dart';
+import 'package:fullfill_admin_web_portal/constants/colors.dart';
 import 'package:fullfill_admin_web_portal/features/view/auth/widgets/login_button.dart';
 import 'package:fullfill_admin_web_portal/features/view_model/auth/login_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:fullfill_admin_web_portal/features/view/auth/widgets/custom_text_field.dart';
 
 class LoginLayout extends StatelessWidget {
   const LoginLayout({super.key});

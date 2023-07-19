@@ -27,15 +27,4 @@ class KColors {
   static const scaffoldBgColor = analogous1Secondary;
   static const selectedAvatarBgColor = analogous2Primary;
   static const nonSelectedAvatarBgColor = analogous1Secondary;
-
-  // static const pageBackGround = Color(0xFF212332);
-  // static const purpleLight = Color(0XFF1e224c);
-  // static const purpleDark = Color.fromARGB(255, 13, 25, 62);
-  // static const Color orange = Color(0XFFec8d2f);
-  // static const Color red = Color(0XFFf44336);
-
-  // static const white = Colors.white;
-  // static const grey = Colors.grey;
-  // static const deepPurple = Colors.deepPurple;
-  // static const blue = Colors.blue;
 }

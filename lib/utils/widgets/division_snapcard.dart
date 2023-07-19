@@ -64,6 +64,7 @@ class DivisionSnapCard extends StatelessWidget {
                     return Container();
                   }
                   final userName = userDetails['name'];
+                  final userId = userDetails['UID'];
 
                   return ListTile(
                     title: Text(
@@ -71,6 +72,14 @@ class DivisionSnapCard extends StatelessWidget {
                       style: const TextStyle(
                         color: KColors.neutralColor,
                         fontSize: 18,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      userId,
+                      style: const TextStyle(
+                        color: KColors.complementarySecondary,
+                        fontSize: 10,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),

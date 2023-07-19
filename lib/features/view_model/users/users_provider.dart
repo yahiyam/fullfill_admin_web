@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/user.dart';
 import 'package:fullfill_admin_web_portal/features/data/services/user_service.dart';
 
@@ -49,6 +49,9 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> unblockUser(String userId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await UserService.unblockAccount(userId, (error) {
         throw error ?? 'Error unblocking user';
       });
@@ -60,14 +63,20 @@ class UserProvider extends ChangeNotifier {
         _usersCount++;
       }
 
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }
 
   Future<void> blockUser(String userId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await UserService.blockAccount(userId, (error) {
         throw error ?? 'Error blocking user';
       });
@@ -78,9 +87,11 @@ class UserProvider extends ChangeNotifier {
         _blockedUsers.add(user);
         _usersCount--;
       }
-
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }

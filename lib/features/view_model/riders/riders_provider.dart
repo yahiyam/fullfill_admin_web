@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fullfill_admin_web_portal/features/data/model/rider.dart';
 import 'package:fullfill_admin_web_portal/features/data/services/rider_service.dart';
 
@@ -49,6 +49,9 @@ class RiderProvider extends ChangeNotifier {
 
   Future<void> unblockRider(String riderId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await RiderService.unblockAccount(riderId, (error) {
         throw error ?? 'Error unblocking rider';
       });
@@ -61,14 +64,20 @@ class RiderProvider extends ChangeNotifier {
         _ridersCount++;
       }
 
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }
 
   Future<void> blockRider(String userId) async {
     try {
+      _isLoading = true;
+      notifyListeners();
+
       await RiderService.blockAccount(userId, (error) {
         throw error ?? 'Error blocking rider';
       });
@@ -81,8 +90,11 @@ class RiderProvider extends ChangeNotifier {
         _ridersCount--;
       }
 
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
+      _isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }
